@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:07:04
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 18:35:47
+ * @LastEditTime: 2022-08-23 18:42:55
  * @FilePath: /resume/app/renderer/container/Root/index.tsx
  * @Description: 首页
  *
@@ -12,6 +12,8 @@ import React from 'react';
 import './index.less';
 import Logo from '../../../../assets/logo.png';
 import { useHistory } from 'react-router';
+// 提供与桌面集成相关的功能
+import { shell } from 'electron';
 
 function Root() {
   const history = useHistory();
@@ -22,6 +24,8 @@ function Root() {
       console.log('跳转到简历页面');
       history.push('/resume');
     } else {
+      // 打开页面
+      shell.openExternal('https://github.com/zard999');
       console.log('跳转到github');
     }
   };
