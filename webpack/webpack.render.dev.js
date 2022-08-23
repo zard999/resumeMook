@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:59:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 15:25:31
+ * @LastEditTime: 2022-08-23 15:29:39
  * @FilePath: /resume/webpack/webpack.render.dev.js
  * @Description: 渲染进程开发配置
  *
@@ -41,6 +41,33 @@ const devConfig = {
       chunks: ['index'],
     }),
   ],
+  module: {
+    rules: [
+      // 打包css的loader
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      // less的loader
+      {
+        test: /\.less$/,
+        exclude: /node_modules/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                localIdentName: '[name]__[local]__[hash:base64:5]',
+              },
+            },
+          },
+          'postcss-loader',
+          'less-loader',
+        ],
+      },
+    ],
+  },
 };
 
 module.exports = webpackMerge.merge(baseConfig, devConfig);
