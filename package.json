@@ -1,0 +1,16 @@
+{
+  "name": "resume",
+  "version": "0.0.1",
+  "author": "zyh",
+  "description": "resume",
+  "main": "./app/main/electron.js",
+  "scripts": {
+    "start:main": "electron ./app/main/electron.js",
+    "install:electron": "ELECTRON_MIRROR=https://cdn.npm.taobao.org/dist/electron/ npm install electron"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^11.1.1"
+  }
+}
