@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:53:54
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 14:09:47
+ * @LastEditTime: 2022-08-23 15:08:26
  * @FilePath: /resume/webpack/webpack.main.dev.js
  * @Description: 主进程的配置
  *
@@ -19,7 +19,7 @@ const webpackMerge = require("webpack-merge");
  * @return {*}
  */
 const mainConfig = {
-  entry: path.resolve(__dirname, "../app/main/electron.js"),
+  entry: path.resolve(__dirname, "../app/main/electron.ts"),
   target: "electron-main", // 针对主进程
   output: {
     filename: "electron.js",

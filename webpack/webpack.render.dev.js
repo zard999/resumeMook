@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:59:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 14:36:40
+ * @LastEditTime: 2022-08-23 15:08:33
  * @FilePath: /resume/webpack/webpack.render.dev.js
  * @Description: 渲染进程开发配置
  *
@@ -17,7 +17,7 @@ const devConfig = {
   mode: "development",
   entry: {
     // 👇 对应渲染进程的 app.jsx 入口文件
-    index: path.resolve(__dirname, "../app/renderer/app.jsx"),
+    index: path.resolve(__dirname, "../app/renderer/app.tsx"),
   },
   output: {
     filename: "[name].[hash].js",
