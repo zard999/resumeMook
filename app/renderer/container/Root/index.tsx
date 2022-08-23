@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:07:04
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 23:25:58
+ * @LastEditTime: 2022-08-23 23:33:59
  * @FilePath: /resume/app/renderer/container/Root/index.tsx
  * @Description: 首页
  *
@@ -15,13 +15,14 @@ import { useHistory } from 'react-router';
 // 提供与桌面集成相关的功能
 import { shell } from 'electron';
 import { ROUTER_ENTRY, ROUTER_KEY } from '@common/constants/router';
+import { isHttpOrHttpsUrl } from '@common/utils/router';
 
 function Root() {
   const history = useHistory();
 
   // 路由跳转
   const onRouterToLink = (router: TSRouter.Item) => {
-    if (router.text !== '简历') {
+    if (isHttpOrHttpsUrl(router.url)) {
       shell.openExternal(router.url);
       console.log('跳转到github');
     } else {
