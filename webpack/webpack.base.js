@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:41:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 22:47:44
+ * @LastEditTime: 2022-08-23 23:10:12
  * @FilePath: /resume/webpack/webpack.base.js
  * @Description: webpack配置文件
  *
@@ -24,6 +24,7 @@ module.exports = {
     alias: {
       '@assets': path.join(__dirname, '../', 'assets/'),
       '@src': path.join(__dirname, '../', 'app/renderer'),
+      '@common': path.join(__dirname, '../', 'app/renderer/common'),
     },
   },
   module: {

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:07:04
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 22:51:21
+ * @LastEditTime: 2022-08-23 23:25:58
  * @FilePath: /resume/app/renderer/container/Root/index.tsx
  * @Description: 首页
  *
@@ -14,19 +14,20 @@ import Logo from '@assets/logo.png';
 import { useHistory } from 'react-router';
 // 提供与桌面集成相关的功能
 import { shell } from 'electron';
+import { ROUTER_ENTRY, ROUTER_KEY } from '@common/constants/router';
 
 function Root() {
   const history = useHistory();
 
   // 路由跳转
-  const onRouterToLink = (text: string) => {
-    if (text === '简历') {
-      console.log('跳转到简历页面');
-      history.push('/resume');
+  const onRouterToLink = (router: TSRouter.Item) => {
+    if (router.text !== '简历') {
+      shell.openExternal(router.url);
+      console.log('跳转到github');
     } else {
       // 打开页面
-      shell.openExternal('https://github.com/zard999');
-      console.log('跳转到github');
+      console.log('跳转到简历页面', router);
+      history.push(router.url);
     }
   };
   return (
@@ -36,10 +37,10 @@ function Root() {
         <div styleName="title">resumePlatform</div>
         <div styleName="tips">一个模板简历制作平台, 让你的简历更加出众 ~</div>
         <div styleName="action">
-          {['介绍', '简历', '源码'].map((text, index) => {
+          {ROUTER_ENTRY.map((router: TSRouter.Item) => {
             return (
-              <div key={index} styleName="item" onClick={() => onRouterToLink(text)}>
-                {text}
+              <div key={router.key} styleName="item" onClick={() => onRouterToLink(router)}>
+                {router.text}
               </div>
             );
           })}
