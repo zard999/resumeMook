@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 14:01:13
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 14:02:58
+ * @LastEditTime: 2022-08-23 14:59:42
  * @FilePath: /resume/app/renderer/app.jsx
  * @Description: App
  *
@@ -10,7 +10,7 @@
  */
 import React from "react";
 import ReactDOM from "react-dom";
-import { Route, Router, Switch } from "react-router";
+import { Route, HashRouter as Router, Switch } from "react-router-dom";
 
 function App() {
   return (

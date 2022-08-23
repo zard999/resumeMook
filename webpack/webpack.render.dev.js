@@ -2,13 +2,13 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:59:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 14:08:59
+ * @LastEditTime: 2022-08-23 14:36:40
  * @FilePath: /resume/webpack/webpack.render.dev.js
  * @Description: 渲染进程开发配置
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
-const { path } = require("path");
+const path = require("path");
 const webpackMerge = require("webpack-merge");
 const baseConfig = require("./webpack.base");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -43,4 +43,4 @@ const devConfig = {
   ],
 };
 
-module.exports = webpackMerge(baseConfig, devConfig);
+module.exports = webpackMerge.merge(baseConfig, devConfig);
