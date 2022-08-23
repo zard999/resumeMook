@@ -3,17 +3,72 @@
   "version": "0.0.1",
   "author": "zyh",
   "description": "resume",
-  "main": "./app/main/electron.js",
+  "main": "./dist/electron.js",
   "scripts": {
+    "start:dev": "npm run start:render && npm run start:main",
     "start:main": "webpack --config ./webpack/webpack.main.dev.js && electron ./dist/electron.js",
     "start:render": "webpack-dev-server --config ./webpack/webpack.render.dev.js",
-    "install:electron": "ELECTRON_MIRROR=https://cdn.npm.taobao.org/dist/electron/ npm install electron"
+    "install:electron": "ELECTRON_MIRROR=https://cdn.npm.taobao.org/dist/electron/ npm install electron",
+    "build:main": "webpack --config ./webpack/webpack.main.prod.js",
+    "build:render": "webpack --config ./webpack/webpack.render.prod.js",
+    "pack": "npm run build:main && npm run build:render && electron-builder --dir",
+    "dist": "npm run build:main && npm run build:render && electron-builder",
+    "win": "npm run build:main && npm run build:render && electron-builder --win --ia32"
+  },
+  "build": {
+    "appId": "com.resume.,ook",
+    "productName": "简历平台",
+    "copyright": "Copyright © 2022 ${author}",
+    "extends": null,
+    "files": [
+      "dist/**/*",
+      "package.json",
+      "node_modules/"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "build_exe"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ]
+    },
+    "nsis": {
+      "language": 2052,
+      "artifactName": "react_view.exe",
+      "allowElevation": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "allowToChangeInstallationDirectory": true,
+      "oneClick": false
+    }
   },
   "keywords": [],
   "license": "ISC",
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
-    "electron": "^11.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-router": "5.2.0",
@@ -39,6 +94,7 @@
     "babel-plugin-react-css-modules": "5.2.6",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "3.0.0",
+    "electron-builder": "^23.3.3",
     "eslint": "^7.26.0",
     "eslint-config-alloy": "^4.1.0",
     "eslint-config-prettier": "^8.3.0",
@@ -57,6 +113,7 @@
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.2",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "electron": "^11.1.1"
   }
 }

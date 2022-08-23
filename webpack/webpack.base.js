@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:41:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 16:02:37
+ * @LastEditTime: 2022-08-23 16:21:13
  * @FilePath: /resume/webpack/webpack.base.js
  * @Description: webpack配置文件
  *
@@ -52,5 +52,5 @@ module.exports = {
       },
     ],
   },
-  plugins: [new CleanWebpackPlugin()],
+  // plugins: [new CleanWebpackPlugin()], //打包的时候注释掉
 };

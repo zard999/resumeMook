@@ -26,7 +26,7 @@ const mainConfig = {
     path: path.resolve(__dirname, '../dist'),
   },
   devtool: 'inline-source-map',
-  mode: 'development',
+  mode: 'development', // 相当于我们在Webpack.DefinePlugin中定义process.env.NODE_ENV = 'development'
 };
 
 module.exports = webpackMerge.merge(baseConfig, mainConfig);
