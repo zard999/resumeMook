@@ -2,14 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:41:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 14:35:26
+ * @LastEditTime: 2022-08-23 15:21:37
  * @FilePath: /resume/webpack/webpack.base.js
  * @Description: webpack配置文件
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
-const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // 每次打包自动清除上一次的dist文件
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 每次打包自动清除上一次的dist文件
 /**
  * @description:
  * resolve：配置webpack如何寻找模块对应的文件
@@ -20,9 +20,9 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin"); // 每次打包�
  */
 module.exports = {
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      "@src": path.join(__dirname, "../", "app/renderer"),
+      '@src': path.join(__dirname, '../', 'app/renderer'),
     },
   },
   module: {
@@ -31,9 +31,9 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /(node_modules|bower_components)/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env"],
+            presets: ['@babel/preset-env'],
           },
         },
       },
