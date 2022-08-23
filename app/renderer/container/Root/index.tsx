@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:07:04
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 18:42:55
+ * @LastEditTime: 2022-08-23 22:51:21
  * @FilePath: /resume/app/renderer/container/Root/index.tsx
  * @Description: 首页
  *
@@ -10,7 +10,7 @@
  */
 import React from 'react';
 import './index.less';
-import Logo from '../../../../assets/logo.png';
+import Logo from '@assets/logo.png';
 import { useHistory } from 'react-router';
 // 提供与桌面集成相关的功能
 import { shell } from 'electron';

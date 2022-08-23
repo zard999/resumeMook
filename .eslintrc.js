@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 15:21:05
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 15:24:58
+ * @LastEditTime: 2022-08-23 22:58:16
  * @FilePath: /resume/.eslintrc.js
  * @Description: eslint配置文件
  *
@@ -48,5 +48,11 @@ module.exports = {
     '@typescript-eslint/no-invalid-this': 'off',
     'react/jsx-key': 0,
     'no-undef': 0,
+
+    '@typescript-eslint/no-require-imports': 0,
+    '@typescript-eslint/no-duplicate-enum-values': 0,
+    'no-constant-binary-expression': 0,
+    'no-unused-private-class-members': 0,
+    'prefer-object-has-own': 0,
   },
 };

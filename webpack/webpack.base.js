@@ -2,14 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:41:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 16:21:13
+ * @LastEditTime: 2022-08-23 22:47:44
  * @FilePath: /resume/webpack/webpack.base.js
  * @Description: webpack配置文件
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 const path = require('path');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 每次打包自动清除上一次的dist文件
+// const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 每次打包自动清除上一次的dist文件
 /**
  * @description:
  * resolve：配置webpack如何寻找模块对应的文件
@@ -22,6 +22,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
+      '@assets': path.join(__dirname, '../', 'assets/'),
       '@src': path.join(__dirname, '../', 'app/renderer'),
     },
   },
