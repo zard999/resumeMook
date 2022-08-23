@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:41:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 15:21:37
+ * @LastEditTime: 2022-08-23 16:02:37
  * @FilePath: /resume/webpack/webpack.base.js
  * @Description: webpack配置文件
  *
@@ -36,6 +36,19 @@ module.exports = {
             presets: ['@babel/preset-env'],
           },
         },
+      },
+      // 处理图片
+      {
+        test: /\.(jpg|png|jpeg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name]_[hash].[ext]',
+              outputPath: 'images/',
+            },
+          },
+        ],
       },
     ],
   },
