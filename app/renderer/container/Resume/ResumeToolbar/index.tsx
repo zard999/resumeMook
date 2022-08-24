@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:49:55
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 18:38:30
+ * @LastEditTime: 2022-08-24 23:05:58
  * @FilePath: /resume/app/renderer/container/Resume/ResumeToolbar/index.tsx
  * @Description: 工具条
  *
@@ -14,6 +14,7 @@ import RESUME_TOOLBAR_LIST from '@common/constants/resume';
 import MyScrollBox from '@common/components/MyScrollBox';
 import { setResumeToolbarKeys, selectResumeToolbarKeys } from '../slice';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
+import Messager, { MESSAGE_EVENT_NAME_MAPS } from '@common/message';
 
 function ResumeToolbar() {
   const [addToolbarList, setAddToolbarList] = useState<TSResume.SliderItem[]>([]);
@@ -51,6 +52,7 @@ function ResumeToolbar() {
     }
   };
   useEffect(() => {
+    // 初始化
     if (RESUME_TOOLBAR_LIST.length > 0) {
       let _addToolbarList: TSResume.SliderItem[] = [];
       let _unAddToolbarList: TSResume.SliderItem[] = [];
@@ -82,7 +84,16 @@ function ResumeToolbar() {
             <div styleName="content">
               {addToolbarList.map((addToolbar: TSResume.SliderItem, index: number) => {
                 return (
-                  <div styleName="box" key={addToolbar.key}>
+                  <div
+                    styleName="box"
+                    key={addToolbar.key}
+                    onClick={() => {
+                      console.log('MESSAGE_EVENT_NAME_MAPS.OPEN_FORM_MODAL', MESSAGE_EVENT_NAME_MAPS.OPEN_FORM_MODAL);
+                      Messager.send(MESSAGE_EVENT_NAME_MAPS.OPEN_FORM_MODAL, {
+                        form_name: addToolbar.key,
+                      });
+                    }}
+                  >
                     <div styleName="info">
                       <i styleName="icon" />
                       <div styleName="text">
