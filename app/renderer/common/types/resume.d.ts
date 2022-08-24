@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:21:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 15:34:16
+ * @LastEditTime: 2022-08-24 16:36:27
  * @FilePath: /resume/app/renderer/common/types/resume.d.ts
  * @Description:
  *
@@ -103,6 +103,6 @@ declare namespace TSResume {
     key: string; //  唯一标识
     name: string; // 模块名
     summary: string; // 描述
-    require: boolean; // 是否必须
+    require?: boolean; // 是否必须
   }
 }
