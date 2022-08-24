@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 11:19:28
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 11:28:57
+ * @LastEditTime: 2022-08-24 11:43:27
  * @FilePath: /resume/app/renderer/common/components/MyButton/index.tsx
  * @Description: 封装Button组件
  *
@@ -10,6 +10,7 @@
  */
 import React from 'react';
 import classnames from 'classnames';
+import './index.less';
 
 export interface Button {
   size?: 'small' | 'middle' | 'big'; // 按钮大小
