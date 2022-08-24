@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 09:33:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 10:01:47
+ * @LastEditTime: 2022-08-24 11:15:11
  * @FilePath: /resume/app/renderer/store/slice.ts
  * @Description:
  *
@@ -11,8 +11,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
 
-const initialState = {
-  appName: '简历应用平台',
+export interface GStore {
+  rootPath: string; // 项目路径
+}
+
+const initialState: GStore = {
+  rootPath: '',
 };
 
 // 创建redux模块
@@ -22,5 +26,5 @@ const globalSlice = createSlice({
   reducers: {},
 });
 
-export const setAppName = (state: RootState) => state.global.appName;
+export const setAppName = (state: RootState) => state.global.rootPath;
 export default globalSlice.reducer; // store里面需要的是reducer

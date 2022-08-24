@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:07:04
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 10:34:55
+ * @LastEditTime: 2022-08-24 11:15:58
  * @FilePath: /resume/app/renderer/container/Root/index.tsx
  * @Description: 首页
  *
@@ -17,12 +17,10 @@ import { shell } from 'electron';
 import { ROUTER_ENTRY, ROUTER_KEY } from '@common/constants/router';
 import { isHttpOrHttpsUrl } from '@common/utils/router';
 import { useAppSelector } from '@store/hooks';
-import { setAppName } from '@store/slice';
 
 function Root() {
   const history = useHistory();
-  const appName = useAppSelector(setAppName);
-  console.log('appName', appName);
+
   // 路由跳转
   const onRouterToLink = (router: TSRouter.Item) => {
     if (isHttpOrHttpsUrl(router.url)) {
