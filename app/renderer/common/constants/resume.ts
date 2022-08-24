@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 16:28:41
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 16:41:50
+ * @LastEditTime: 2022-08-24 16:51:16
  * @FilePath: /resume/app/renderer/common/constants/resume.ts
  * @Description: 简历常量
  *
@@ -27,7 +27,7 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
     key: RESUME_TOOLBAR_MAPS.personal,
     name: '个人信息',
     summary: '更好介绍自己，机会会更多',
-    require: false,
+    require: true,
   },
   {
     key: RESUME_TOOLBAR_MAPS.education,
@@ -75,16 +75,19 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
     key: RESUME_TOOLBAR_MAPS.evaluation,
     name: '个人评价',
     summary: '低调夸一夸自己有什么亮点',
+    require: false,
   },
   {
     key: RESUME_TOOLBAR_MAPS.skill,
     name: '技能清单',
     summary: '展示具备的技能，突出你的能力',
+    require: false,
   },
   {
     key: RESUME_TOOLBAR_MAPS.test,
     name: '测试用例',
     summary: '测试用例，一键覆盖',
+    require: true,
   },
 ];
 
