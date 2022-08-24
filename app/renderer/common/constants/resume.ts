@@ -12,7 +12,7 @@ export const RESUME_TOOLBAR_MAPS = {
   personal: 'personal', // 个人信息
   education: 'education', // 教育信息
   contact: 'contact', // 联系方式
-  workPrefer: 'workPrefer', // 工作期望
+  workPrefer: 'workPrefer', // 求职意向
   schoolExperience: 'schoolExperience', // 在校经历
   projectExperience: 'projectExperience', // 项目经验
   workExperience: 'workExperience', // 工作经历

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:49:55
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 17:33:03
+ * @LastEditTime: 2022-08-24 18:38:30
  * @FilePath: /resume/app/renderer/container/Resume/ResumeToolbar/index.tsx
  * @Description: 工具条
  *
@@ -12,10 +12,15 @@ import React, { useEffect, useState } from 'react';
 import './index.less';
 import RESUME_TOOLBAR_LIST from '@common/constants/resume';
 import MyScrollBox from '@common/components/MyScrollBox';
+import { setResumeToolbarKeys, selectResumeToolbarKeys } from '../slice';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
 
 function ResumeToolbar() {
   const [addToolbarList, setAddToolbarList] = useState<TSResume.SliderItem[]>([]);
   const [unAddToolbarList, setUnAddToolbarList] = useState<TSResume.SliderItem[]>([]);
+
+  const dispatch = useAppDispatch();
+  const resumeToolbarKeys = [...useAppSelector(selectResumeToolbarKeys)];
 
   // 添加模块
   const unToAdd = (item: TSResume.SliderItem, index: number) => {
@@ -23,6 +28,12 @@ function ResumeToolbar() {
     addToolbarList.push(item);
     setUnAddToolbarList([...unAddToolbarList]);
     setAddToolbarList([...addToolbarList]);
+
+    // 添加key
+    if (!resumeToolbarKeys.includes(item.key)) {
+      resumeToolbarKeys.push(item.key);
+      dispatch(setResumeToolbarKeys(resumeToolbarKeys));
+    }
   };
 
   // 删除模块
@@ -31,6 +42,13 @@ function ResumeToolbar() {
     unAddToolbarList.push(item);
     setUnAddToolbarList([...unAddToolbarList]);
     setAddToolbarList([...addToolbarList]);
+
+    // 删除key
+    let findIndex = resumeToolbarKeys.findIndex((d) => d === item.key);
+    if (findIndex) {
+      resumeToolbarKeys.splice(findIndex, 1);
+      dispatch(setResumeToolbarKeys(resumeToolbarKeys));
+    }
   };
   useEffect(() => {
     if (RESUME_TOOLBAR_LIST.length > 0) {
@@ -45,6 +63,9 @@ function ResumeToolbar() {
       });
       setAddToolbarList(_addToolbarList);
       setUnAddToolbarList(_unAddToolbarList);
+
+      // 向redux添加keys
+      dispatch(setResumeToolbarKeys(_addToolbarList.map((item) => item.key)));
     }
   }, []);
 

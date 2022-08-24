@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 15:42:32
- * @FilePath: /resume/app/renderer/container/templates/templateOne/components/Work/index.tsx
+ * @LastEditTime: 2022-08-24 18:47:47
+ * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/components/Work/index.tsx
  * @Description: 工作经历
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.

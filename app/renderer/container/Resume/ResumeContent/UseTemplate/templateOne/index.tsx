@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 15:39:13
- * @FilePath: /resume/app/renderer/container/templates/templateOne/index.tsx
+ * @LastEditTime: 2022-08-24 22:40:20
+ * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/index.tsx
  * @Description: 模板1
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
@@ -20,8 +20,12 @@ import Skill from './components/Skill';
 import Post from './components/Post';
 import Project from './components/Project';
 import Work from './components/Work';
+import { useAppSelector } from '@store/hooks';
+import { selectResumeToolbarKeys } from '@src/container/Resume/slice';
+import { RESUME_TOOLBAR_MAPS } from '@common/constants/resume';
 
 function TemplateOne() {
+  const resumeToolbarKeys = useAppSelector(selectResumeToolbarKeys);
   // 必须带有id，以方便导出时获取DOM元素内容
   return (
     <div styleName="a4-box">
@@ -34,19 +38,19 @@ function TemplateOne() {
           <div styleName="fillColor" />
           <div styleName="baseData">
             <BaseInfo />
-            <Contact />
-            <Job />
-            <Certificate />
+            {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.contact) && <Contact />}
+            {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.workPrefer) && <Job />}
+            {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.certificate) && <Certificate />}
           </div>
         </div>
         {/* 内容 */}
         <div styleName="center">
           <Synopsis />
           <div styleName="listData">
-            <Skill />
-            <Post />
-            <Project />
-            <Work />
+            {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.skill) && <Skill />}
+            {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.schoolExperience) && <Post />}
+            {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.projectExperience) && <Project />}
+            {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.workExperience) && <Work />}
           </div>
         </div>
       </div>
