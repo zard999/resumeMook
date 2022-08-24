@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:41:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 09:46:46
+ * @LastEditTime: 2022-08-24 17:08:10
  * @FilePath: /resume/webpack/webpack.base.js
  * @Description: webpack配置文件
  *
@@ -49,6 +49,7 @@ module.exports = {
             options: {
               name: '[name]_[hash].[ext]',
               outputPath: 'images/',
+              esModule: false,
             },
           },
         ],
