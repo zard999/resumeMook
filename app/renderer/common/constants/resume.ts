@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 16:28:41
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 16:51:16
+ * @LastEditTime: 2022-08-24 23:28:19
  * @FilePath: /resume/app/renderer/common/constants/resume.ts
  * @Description: 简历常量
  *
