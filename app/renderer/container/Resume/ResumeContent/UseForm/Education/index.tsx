@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 09:58:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 15:06:07
+ * @LastEditTime: 2022-08-25 15:27:01
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Education/index.tsx
  * @Description: 教育信息
  *
@@ -37,7 +37,7 @@ function Eduction({ onClose }: IProps) {
           </div>
           <div styleName="right">
             <MyInput
-              onChange={(e) => updateResumeHook('base/school', e.target?.value || '')}
+              onChange={(e) => updateResumeHook('education/school', e.target?.value || '')}
               value={education?.school || ''}
               placeholder="请输入贵校"
               allowClear={true}
@@ -50,7 +50,7 @@ function Eduction({ onClose }: IProps) {
           </div>
           <div styleName="right">
             <MyInput
-              onChange={(e) => updateResumeHook('base/major', e.target?.value || '')}
+              onChange={(e) => updateResumeHook('education/major', e.target?.value || '')}
               value={education?.major || ''}
               placeholder="请输入专业"
               allowClear={true}
@@ -63,7 +63,7 @@ function Eduction({ onClose }: IProps) {
           </div>
           <div styleName="right">
             <MyInput
-              onChange={(e) => updateResumeHook('base/degree', e.target?.value || '')}
+              onChange={(e) => updateResumeHook('education/degree', e.target?.value || '')}
               value={education?.degree || ''}
               placeholder="学士？硕士？博士？"
               allowClear={true}
@@ -81,7 +81,7 @@ function Eduction({ onClose }: IProps) {
                   ...education?.onSchoolTime,
                   beginTime: e.target.value,
                 };
-                updateResumeHook('base/onSchoolTime', nextTime);
+                updateResumeHook('education/onSchoolTime', nextTime);
               }}
               value={education?.onSchoolTime?.beginTime || ''}
               placeholder="2015.09.01"
@@ -95,7 +95,7 @@ function Eduction({ onClose }: IProps) {
                   ...education?.onSchoolTime,
                   endTime: e.target.value,
                 };
-                updateResumeHook('base/onSchoolTime', nextTime);
+                updateResumeHook('education/onSchoolTime', nextTime);
               }}
               value={education?.onSchoolTime?.endTime || ''}
               placeholder="2015.06.30"

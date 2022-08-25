@@ -113,6 +113,11 @@ const resumeSlice = createSlice({
       state.resume.base = action.payload;
     },
 
+    // 修改Base
+    updateEducation(state, action) {
+      state.resume.education = action.payload;
+    },
+
     // 修改Contact
     updateContact(state, action) {
       state.resume.contact = action.payload;
@@ -125,6 +130,6 @@ export const selectResumeToolbarKeys = (state: RootState) => state.resume.resume
 export const selectResume = (state: RootState) => state.resume.resume;
 
 // 导出reducer
-export const { setResumeToolbarKeys, updateBase, updateContact } = resumeSlice.actions;
+export const { setResumeToolbarKeys, updateBase, updateContact, updateEducation } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
