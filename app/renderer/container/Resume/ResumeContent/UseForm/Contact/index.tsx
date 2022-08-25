@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 09:07:26
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 09:22:44
+ * @LastEditTime: 2022-08-25 15:15:49
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Contact/index.tsx
  * @Description: 联系方式弹框
  *
@@ -15,9 +15,12 @@ import { useSelector } from 'react-redux';
 import { selectResume } from '@src/container/Resume/slice';
 import { IProps } from '../types';
 import './index.less';
+import useUpdateResumeHook from '@src/container/Resume/ResumeContent/useUpdateResumeHook';
 
 function Contact({ onClose }: IProps) {
   const { contact } = useSelector(selectResume);
+  const updateResumeHook = useUpdateResumeHook();
+
   return (
     <MyModal.Dialog
       title="联系方式"
@@ -34,7 +37,12 @@ function Contact({ onClose }: IProps) {
             <span styleName="require">*</span>电 话 ：
           </div>
           <div styleName="right">
-            <MyInput onChange={(e) => {}} value={contact?.phone || ''} allowClear placeholder="请输入电话号码" />
+            <MyInput
+              onChange={(e) => updateResumeHook('contact/phone', e.target?.value || '')}
+              value={contact?.phone || ''}
+              allowClear
+              placeholder="请输入电话号码"
+            />
           </div>
         </div>
 
@@ -43,7 +51,12 @@ function Contact({ onClose }: IProps) {
             <span styleName="require">*</span>邮 箱 ：
           </div>
           <div styleName="right">
-            <MyInput onChange={(e) => {}} value={contact?.email || ''} allowClear placeholder="请输入邮箱" />
+            <MyInput
+              onChange={(e) => updateResumeHook('contact/email', e.target?.value || '')}
+              value={contact?.email || ''}
+              allowClear
+              placeholder="请输入邮箱"
+            />
           </div>
         </div>
 
@@ -55,7 +68,12 @@ function Contact({ onClose }: IProps) {
             Github ：
           </div>
           <div styleName="right">
-            <MyInput onChange={(e) => {}} value={contact?.github || ''} allowClear placeholder="请输入 Github 地址" />
+            <MyInput
+              onChange={(e) => updateResumeHook('contact/github', e.target?.value || '')}
+              value={contact?.github || ''}
+              allowClear
+              placeholder="请输入 Github 地址"
+            />
           </div>
         </div>
 
@@ -67,7 +85,12 @@ function Contact({ onClose }: IProps) {
             掘 金 ：
           </div>
           <div styleName="right">
-            <MyInput onChange={(e) => {}} value={contact?.juejin || ''} allowClear placeholder="掘金地址" />
+            <MyInput
+              onChange={(e) => updateResumeHook('contact/juejin', e.target?.value || '')}
+              value={contact?.juejin || ''}
+              allowClear
+              placeholder="掘金地址"
+            />
           </div>
         </div>
       </div>

@@ -2,14 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 14:35:25
+ * @LastEditTime: 2022-08-25 15:19:10
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import { useAppDispatch, useAppSelector } from '@src/store/hooks';
-import { selectResume, updateResume } from '../slice';
+import { selectResume, updateBase, updateContact } from '../slice';
 
 /**
  * @description: 更新简历信息，这是修改 redux 简历信息的唯一方法
@@ -19,11 +19,14 @@ import { selectResume, updateResume } from '../slice';
  */
 function useUpdateResumeHook() {
   const updatePersonalHook = useUpdatePersonalHook();
+  const updateContactHook = useUpdateContactHook();
+
   return <T>(stateKey: string, stateValue: T) => {
     const keys = stateKey.split('/') || [];
     if (keys[0]) {
       console.log('111', stateKey, stateValue, keys);
       if (keys[0] === 'base') updatePersonalHook(keys[1], stateValue);
+      if (keys[0] === 'contact') updateContactHook(keys[1], stateValue);
     }
   };
 }
@@ -37,8 +40,25 @@ function useUpdatePersonalHook() {
   const dispatch = useAppDispatch();
   return <T>(stateKey: string, stateValue: T) => {
     dispatch(
-      updateResume({
+      updateBase({
         ...base,
+        [stateKey]: stateValue,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改联系方式（contact）
+ * @return {*}
+ */
+function useUpdateContactHook() {
+  const { contact } = useAppSelector(selectResume);
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    dispatch(
+      updateContact({
+        ...contact,
         [stateKey]: stateValue,
       })
     );
