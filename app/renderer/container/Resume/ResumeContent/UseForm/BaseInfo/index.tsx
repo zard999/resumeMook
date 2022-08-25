@@ -2,9 +2,9 @@
  * @Author: zyh
  * @Date: 2022-08-24 23:12:50
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 09:05:13
+ * @LastEditTime: 2022-08-25 10:06:16
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/BaseInfo/index.tsx
- * @Description:
+ * @Description: 基本信息
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
@@ -40,61 +40,10 @@ function BaseInfo({ onClose }: IProps) {
 
         <div styleName="flex">
           <div styleName="left">
-            <span styleName="require">*</span>院 校 ：
-          </div>
-          <div styleName="right">
-            <MyInput onChange={(e) => {}} value={base?.school || ''} placeholder="请输入籍贯" allowClear={true} />
-          </div>
-        </div>
-
-        <div styleName="flex">
-          <div styleName="left">
             <span styleName="require">*</span>籍 贯 ：
           </div>
           <div styleName="right">
             <MyInput onChange={(e) => {}} value={base?.hometown || ''} placeholder="请输入籍贯" allowClear={true} />
-          </div>
-        </div>
-
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require" style={{ opacity: 0 }}>
-              *
-            </span>
-            学 历 ：
-          </div>
-          <div styleName="right">
-            <MyInput onChange={(e) => {}} value={base?.degree || ''} placeholder="请输入籍贯" allowClear={true} />
-          </div>
-        </div>
-
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require" style={{ opacity: 0 }}>
-              *
-            </span>
-            专 业 ：
-          </div>
-          <div styleName="right">
-            <MyInput onChange={(e) => {}} value={base?.major || ''} placeholder="请输入籍贯" allowClear={true} />
-          </div>
-        </div>
-
-        <div styleName="flex">
-          <div styleName="left">
-            <span styleName="require" style={{ opacity: 0 }}>
-              *
-            </span>
-            学 年 ：
-          </div>
-          <div styleName="right">
-            <MyInput
-              onChange={(e) => {}}
-              value={base?.onSchoolTime?.beginTime + ' - ' + base?.onSchoolTime?.endTime || ''}
-              placeholder="请输入籍贯"
-              allowClear={true}
-            />
-            <div styleName="tips"> * 学年请用 - 分割</div>
           </div>
         </div>
 
