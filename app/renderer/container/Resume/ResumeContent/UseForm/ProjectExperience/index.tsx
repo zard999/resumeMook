@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:00:43
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 17:38:58
+ * @LastEditTime: 2022-08-25 18:02:45
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/ProjectExperience/index.tsx
  * @Description: 项目经验弹窗
  *
@@ -15,6 +15,7 @@ import WrapperExperience from '../WrapperExperience';
 import useUpdateResumeHook from '@src/container/Resume/ResumeContent/useUpdateResumeHook';
 import { useAppSelector } from '@store/hooks';
 import { selectResume } from '../../../slice';
+import AdapterExperience, { AdapterExperienceType } from '../WrapperExperience/adapter';
 
 function ProjectExperience() {
   const updateResumeHook = useUpdateResumeHook();
@@ -24,7 +25,10 @@ function ProjectExperience() {
 
   return (
     <MyModal.Dialog title="项目经验">
-      <WrapperExperience dataList={projectExperience} updateDataList={updateDataList}>
+      <WrapperExperience
+        dataList={AdapterExperience.project(projectExperience as AdapterExperienceType[])}
+        updateDataList={updateDataList}
+      >
         <Form />
       </WrapperExperience>
     </MyModal.Dialog>
