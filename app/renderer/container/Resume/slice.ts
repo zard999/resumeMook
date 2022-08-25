@@ -23,8 +23,8 @@ const initialState: RStore = {
       },
     },
     contact: {
-      phone: '135****2922',
-      email: '18748613740@qq.com',
+      phone: '13545438280',
+      email: '1874861374@qq.com',
       github: 'https://github.com/zard999',
       juejin: 'https://juejin.cn/user/1390225439328023',
     },
@@ -44,8 +44,8 @@ const initialState: RStore = {
       '了解 MYSQL，了解数据库优化常用方法',
       '了解基于微信公众号应用开发，采用 Taro 开发微信小程序，具备良好的网络基础知识',
     ],
-    evaluation: '切图工程师',
-    evaluationList: ['切图工程师'],
+    evaluation: '切图工程师，投身开源',
+    evaluationList: ['切图工程师', '投身开源'],
     certificate: '深圳第一届喝酒大赛参与奖',
     certificateList: ['深圳第一届喝酒大赛参与奖'],
     schoolExperience: [

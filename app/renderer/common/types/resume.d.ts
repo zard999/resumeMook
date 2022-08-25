@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:21:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 16:36:27
+ * @LastEditTime: 2022-08-25 11:46:32
  * @FilePath: /resume/app/renderer/common/types/resume.d.ts
  * @Description:
  *
