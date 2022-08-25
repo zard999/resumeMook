@@ -102,10 +102,9 @@ const resumeSlice = createSlice({
   initialState,
   reducers: {
     // 设置keys（包括初始化，添加，删除）
+    // action.payload每次返回的都是整个当前对象浅比较后的对象，所以直接赋值即可
     setResumeToolbarKeys(state, action) {
-      const resumeToolbarKeys = action.payload;
-      state.resumeToolbarKeys = resumeToolbarKeys;
-      console.log('resumeToolbarKeys', state.resumeToolbarKeys);
+      state.resumeToolbarKeys = action.payload;
     },
 
     // 修改Base
@@ -125,10 +124,7 @@ const resumeSlice = createSlice({
 
     // 修改Certificate
     updateCertificate(state, action) {
-      const { certificate, certificateList } = action.payload;
-      console.log('action.payload', action.payload);
-      state.resume.certificate = certificate;
-      state.resume.certificateList = certificateList;
+      state.resume.certificate = action.payload;
     },
 
     // 修改Work
