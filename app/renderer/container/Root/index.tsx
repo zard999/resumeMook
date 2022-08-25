@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:07:04
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 23:33:59
+ * @LastEditTime: 2022-08-24 11:15:58
  * @FilePath: /resume/app/renderer/container/Root/index.tsx
  * @Description: 首页
  *
@@ -16,6 +16,7 @@ import { useHistory } from 'react-router';
 import { shell } from 'electron';
 import { ROUTER_ENTRY, ROUTER_KEY } from '@common/constants/router';
 import { isHttpOrHttpsUrl } from '@common/utils/router';
+import { useAppSelector } from '@store/hooks';
 
 function Root() {
   const history = useHistory();
