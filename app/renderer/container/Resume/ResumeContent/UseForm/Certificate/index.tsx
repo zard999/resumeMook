@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 10:09:24
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 10:13:18
+ * @LastEditTime: 2022-08-25 15:31:47
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Certificate/index.tsx
  * @Description: 获奖证书弹窗
  *
@@ -15,9 +15,11 @@ import { IProps } from '../types';
 import { useSelector } from 'react-redux';
 import './index.less';
 import { selectResume } from '../../../slice';
+import useUpdateResumeHook from '@src/container/Resume/ResumeContent/useUpdateResumeHook';
 
 function Certificate({ onClose }: IProps) {
   const { certificate } = useSelector(selectResume);
+  const updateResumeHook = useUpdateResumeHook();
   return (
     <MyModal.Dialog
       title="获奖证书"
@@ -36,7 +38,7 @@ function Certificate({ onClose }: IProps) {
           <div styleName="right">
             <MyInput
               type="textarea"
-              onChange={(e) => {}}
+              onChange={(e) => updateResumeHook('certificate', e.target?.value)}
               rows={5}
               value={certificate || ''}
               placeholder="互联网+大赛一等奖｜掘金大学骰王｜互联网喝酒大赛进步奖"

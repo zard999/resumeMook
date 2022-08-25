@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 09:58:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 15:27:01
+ * @LastEditTime: 2022-08-25 15:36:55
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Education/index.tsx
  * @Description: 教育信息
  *
