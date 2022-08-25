@@ -130,6 +130,11 @@ const resumeSlice = createSlice({
       state.resume.certificate = certificate;
       state.resume.certificateList = certificateList;
     },
+
+    // 修改Work
+    updateWork(state, action) {
+      state.resume.work = action.payload;
+    },
   },
 });
 
@@ -138,7 +143,7 @@ export const selectResumeToolbarKeys = (state: RootState) => state.resume.resume
 export const selectResume = (state: RootState) => state.resume.resume;
 
 // 导出reducer
-export const { setResumeToolbarKeys, updateBase, updateContact, updateEducation, updateCertificate } =
+export const { setResumeToolbarKeys, updateBase, updateContact, updateEducation, updateCertificate, updateWork } =
   resumeSlice.actions;
 
 export default resumeSlice.reducer;

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 10:09:24
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 15:31:47
+ * @LastEditTime: 2022-08-25 15:58:48
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Certificate/index.tsx
  * @Description: 获奖证书弹窗
  *

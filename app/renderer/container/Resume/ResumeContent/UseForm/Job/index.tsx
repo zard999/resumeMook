@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 23:13:14
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 09:19:02
+ * @LastEditTime: 2022-08-25 16:03:34
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Job/index.tsx
  * @Description: 工作期望弹框表单
  *
@@ -15,9 +15,11 @@ import { useSelector } from 'react-redux';
 import './index.less';
 import { selectResume } from '@src/container/Resume/slice';
 import { IProps } from '../types';
+import useUpdateResumeHook from '@src/container/Resume/ResumeContent/useUpdateResumeHook';
 
 function Job({ onClose }: IProps) {
   const { work } = useSelector(selectResume);
+  const updateResumeHook = useUpdateResumeHook();
   return (
     <MyModal.Dialog
       title="工作期望"
@@ -34,7 +36,12 @@ function Job({ onClose }: IProps) {
             <span styleName="require">*</span>职 位 ：
           </div>
           <div styleName="right">
-            <MyInput onChange={(e) => {}} value={work?.job || ''} placeholder="求职岗位" allowClear={true} />
+            <MyInput
+              onChange={(e) => updateResumeHook('work/job', e.target?.value)}
+              value={work?.job || ''}
+              placeholder="求职岗位"
+              allowClear={true}
+            />
           </div>
         </div>
         <div styleName="flex">
@@ -42,7 +49,12 @@ function Job({ onClose }: IProps) {
             <span styleName="require">*</span>城 市 ：
           </div>
           <div styleName="right">
-            <MyInput onChange={(e) => {}} value={work?.city || ''} placeholder="请输入意愿城市" allowClear={true} />
+            <MyInput
+              onChange={(e) => updateResumeHook('work/city', e.target?.value)}
+              value={work?.city || ''}
+              placeholder="请输入意愿城市"
+              allowClear={true}
+            />
             <div styleName="tips"> * 多个地点以｜分割</div>
           </div>
         </div>
