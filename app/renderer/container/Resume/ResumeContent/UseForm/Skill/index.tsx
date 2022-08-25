@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 10:13:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 10:29:25
+ * @LastEditTime: 2022-08-25 16:18:13
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Skill/index.tsx
  * @Description: 技能弹窗
  *
@@ -16,9 +16,11 @@ import { useSelector } from 'react-redux';
 import './index.less';
 import RecommendSkill, { IRecommendSkill } from '@common/constants/skill';
 import { selectResume } from '@src/container/Resume/slice';
+import useUpdateResumeHook from '@src/container/Resume/ResumeContent/useUpdateResumeHook';
 
 function Skill({ onClose }: IProps) {
   const { skill } = useSelector(selectResume);
+  const updateResumeHook = useUpdateResumeHook();
   return (
     <MyModal.Dialog
       title="个人信息"
@@ -60,7 +62,7 @@ function Skill({ onClose }: IProps) {
             </div>
             <MyInput
               type="textarea"
-              onChange={(e) => {}}
+              onChange={(e) => updateResumeHook('skill', e.target?.value)}
               rows={5}
               value={skill}
               placeholder="例如 Vue、React"

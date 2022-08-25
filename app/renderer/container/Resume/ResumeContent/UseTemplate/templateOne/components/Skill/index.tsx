@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 13:41:33
+ * @LastEditTime: 2022-08-25 16:25:52
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/components/Skill/index.tsx
  * @Description: 技能
  *
@@ -21,7 +21,11 @@ function Skill() {
       <ul styleName="skill">
         {skill &&
           skillList?.length > 0 &&
-          skillList?.map((skill: string, index: number) => <li styleName="item">{skill}</li>)}
+          skillList?.map((skill: string, index: number) => (
+            <li key={index} styleName="item">
+              {skill}
+            </li>
+          ))}
       </ul>
     </div>
   );

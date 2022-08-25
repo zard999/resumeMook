@@ -2,14 +2,22 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 16:13:20
+ * @LastEditTime: 2022-08-25 16:30:19
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import { useAppDispatch, useAppSelector } from '@src/store/hooks';
-import { selectResume, updateBase, updateContact, updateEducation, updateCertificate, updateWork } from '../slice';
+import {
+  selectResume,
+  updateBase,
+  updateContact,
+  updateEducation,
+  updateCertificate,
+  updateWork,
+  updateSkill,
+} from '../slice';
 
 /**
  * @description: 更新简历信息，这是修改 redux 简历信息的唯一方法
@@ -23,6 +31,7 @@ function useUpdateResumeHook() {
   const updateEducationHook = useUpdateEducationHook();
   const updateCertificateHook = useUpdateCertificateHook();
   const updateWork = useUpdateWorkHook();
+  const updateSkill = useUpdateSkillHook();
 
   return <T>(stateKey: string, stateValue: T) => {
     const keys = stateKey.split('/') || [];
@@ -33,6 +42,7 @@ function useUpdateResumeHook() {
       if (keys[0] === 'education') updateEducationHook(keys[1], stateValue);
       if (keys[0] === 'certificate') updateCertificateHook(keys[0], stateValue);
       if (keys[0] === 'work') updateWork(keys[1], stateValue);
+      if (keys[0] === 'skill') updateSkill(keys[0], stateValue);
     }
   };
 }
@@ -95,7 +105,7 @@ function useUpdateContactHook() {
 function useUpdateCertificateHook() {
   const dispatch = useAppDispatch();
   return <T>(stateKey: string, stateValue: T) => {
-    let certificateList = stateValue ? (stateValue as any).split('|') : [];
+    let certificateList = stateValue ? (stateValue as any).split('｜') : [];
     dispatch(
       updateCertificate({
         [stateKey]: stateValue,
@@ -106,7 +116,7 @@ function useUpdateCertificateHook() {
 }
 
 /**
- * @description: 修改工作期望（certificate）
+ * @description: 修改工作期望（work）
  * @return {*}
  */
 function useUpdateWorkHook() {
@@ -123,12 +133,29 @@ function useUpdateWorkHook() {
       );
     }
 
-    const cityList = (stateValue as any).split('|');
+    const cityList = (stateValue as any).split('｜');
     dispatch(
       updateWork({
         ...work,
         [stateKey]: stateValue,
         cityList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改荣誉证书（certificate）
+ * @return {*}
+ */
+function useUpdateSkillHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    const skillList = (stateValue as any).split('｜');
+    dispatch(
+      updateSkill({
+        [stateKey]: stateValue,
+        skillList,
       })
     );
   };
