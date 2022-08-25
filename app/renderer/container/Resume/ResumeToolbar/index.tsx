@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:49:55
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 23:05:58
+ * @LastEditTime: 2022-08-25 10:36:37
  * @FilePath: /resume/app/renderer/container/Resume/ResumeToolbar/index.tsx
  * @Description: 工具条
  *
@@ -104,7 +104,14 @@ function ResumeToolbar() {
                       {!addToolbar.require && (
                         <div styleName="action">
                           <i styleName="edit" onClick={(e: React.MouseEvent) => {}} />
-                          <i styleName="delete" onClick={() => addToUn(addToolbar, index)} />
+                          <i
+                            styleName="delete"
+                            onClick={(e: React.MouseEvent) => {
+                              // 👇 这里需要阻止冒泡！！！否则点击删除之后，事件会冒泡，导致的结果就是：我点击删除，然而删除后还给我通过通信器 Messager 发了一个事件
+                              e.stopPropagation && e.stopPropagation();
+                              addToUn(addToolbar, index);
+                            }}
+                          />
                         </div>
                       )}
                     </div>
