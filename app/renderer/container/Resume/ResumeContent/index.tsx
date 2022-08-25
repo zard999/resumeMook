@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:48:00
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 09:03:16
+ * @LastEditTime: 2022-08-25 09:16:43
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/index.tsx
  * @Description:
  *
@@ -17,6 +17,7 @@ import { RESUME_TOOLBAR_MAPS } from '@common/constants/resume';
 
 import BaseInfo from './UseForm/BaseInfo';
 import Job from './UseForm/Job';
+import Contact from './UseForm/Contact';
 
 function ResumeContent() {
   const HEADER_ACTION_HEIGHT = 92;
@@ -51,7 +52,7 @@ function ResumeContent() {
         <>
           {formName === RESUME_TOOLBAR_MAPS.personal && <BaseInfo onClose={onClose} />}
           {formName === RESUME_TOOLBAR_MAPS.workPrefer && <Job onClose={onClose} />}
-          {/* {formName === RESUME_TOOLBAR_MAPS.personal && <BaseInfo onClose={onClose} />} */}
+          {formName === RESUME_TOOLBAR_MAPS.contact && <Contact onClose={onClose} />}
         </>
       )}
     </MyScrollBox>

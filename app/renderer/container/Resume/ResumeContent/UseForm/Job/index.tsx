@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 23:13:14
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 09:00:49
+ * @LastEditTime: 2022-08-25 09:19:02
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Job/index.tsx
  * @Description: 工作期望弹框表单
  *
