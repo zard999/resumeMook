@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 16:30:19
+ * @LastEditTime: 2022-08-25 16:51:32
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
@@ -17,6 +17,7 @@ import {
   updateCertificate,
   updateWork,
   updateSkill,
+  updateEvaluation,
 } from '../slice';
 
 /**
@@ -32,6 +33,7 @@ function useUpdateResumeHook() {
   const updateCertificateHook = useUpdateCertificateHook();
   const updateWork = useUpdateWorkHook();
   const updateSkill = useUpdateSkillHook();
+  const updateEvaluationHook = useUpdateEvaluationHook();
 
   return <T>(stateKey: string, stateValue: T) => {
     const keys = stateKey.split('/') || [];
@@ -43,6 +45,7 @@ function useUpdateResumeHook() {
       if (keys[0] === 'certificate') updateCertificateHook(keys[0], stateValue);
       if (keys[0] === 'work') updateWork(keys[1], stateValue);
       if (keys[0] === 'skill') updateSkill(keys[0], stateValue);
+      if (keys[0] === 'evaluation') updateEvaluationHook(keys[0], stateValue);
     }
   };
 }
@@ -156,6 +159,23 @@ function useUpdateSkillHook() {
       updateSkill({
         [stateKey]: stateValue,
         skillList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改荣誉证书（certificate）
+ * @return {*}
+ */
+function useUpdateEvaluationHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    const evaluationList = (stateValue as any).split('｜');
+    dispatch(
+      updateEvaluation({
+        [stateKey]: stateValue,
+        evaluationList,
       })
     );
   };

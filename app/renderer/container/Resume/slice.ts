@@ -46,7 +46,7 @@ const initialState: RStore = {
       '了解 MYSQL，了解数据库优化常用方法',
       '了解基于微信公众号应用开发，采用 Taro 开发微信小程序，具备良好的网络基础知识',
     ],
-    evaluation: '切图工程师，投身开源',
+    evaluation: '切图工程师｜投身开源',
     evaluationList: ['切图工程师', '投身开源'],
     certificate: '深圳第一届喝酒大赛参与奖',
     certificateList: ['深圳第一届喝酒大赛参与奖'],
@@ -139,6 +139,14 @@ const resumeSlice = createSlice({
       state.resume.skill = skill;
       state.resume.skillList = skillList;
     },
+
+    // 修改Evaluation
+    updateEvaluation(state, action) {
+      console.log('action.payload', action.payload);
+      const { evaluation, evaluationList } = action.payload;
+      state.resume.evaluation = evaluation;
+      state.resume.evaluationList = evaluationList;
+    },
   },
 });
 
@@ -155,6 +163,7 @@ export const {
   updateCertificate,
   updateWork,
   updateSkill,
+  updateEvaluation,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
