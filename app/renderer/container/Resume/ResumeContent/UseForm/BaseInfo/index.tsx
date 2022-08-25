@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 23:12:50
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 10:06:16
+ * @LastEditTime: 2022-08-25 14:42:12
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/BaseInfo/index.tsx
  * @Description: 基本信息
  *
@@ -11,13 +11,15 @@
 import React from 'react';
 import MyModal from '@common/components/MyModal';
 import MyInput from '@common/components/MyInput';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '@src/store/hooks';
 import { selectResume } from '@src/container/Resume/slice';
 import './index.less';
 import { IProps } from '../types';
+import useUpdateResumeHook from '@src/container/Resume/ResumeContent/useUpdateResumeHook';
 
 function BaseInfo({ onClose }: IProps) {
-  const { base, hobby } = useSelector(selectResume);
+  const { base, hobby } = useAppSelector(selectResume);
+  const updateResumeHook = useUpdateResumeHook();
   return (
     <MyModal.Dialog
       title="个人信息"
@@ -34,7 +36,12 @@ function BaseInfo({ onClose }: IProps) {
             <span styleName="require">*</span>姓 名 ：
           </div>
           <div styleName="right">
-            <MyInput onChange={(e) => {}} value={base?.username || ''} placeholder="请输入姓名" allowClear={true} />
+            <MyInput
+              onChange={(e) => updateResumeHook('base/username', e.target?.value || '')}
+              value={base?.username || ''}
+              placeholder="请输入姓名"
+              allowClear={true}
+            />
           </div>
         </div>
 
@@ -43,7 +50,12 @@ function BaseInfo({ onClose }: IProps) {
             <span styleName="require">*</span>籍 贯 ：
           </div>
           <div styleName="right">
-            <MyInput onChange={(e) => {}} value={base?.hometown || ''} placeholder="请输入籍贯" allowClear={true} />
+            <MyInput
+              onChange={(e) => updateResumeHook('base/hometown', e.target?.value || '')}
+              value={base?.hometown || ''}
+              placeholder="请输入籍贯"
+              allowClear={true}
+            />
           </div>
         </div>
 
@@ -57,7 +69,7 @@ function BaseInfo({ onClose }: IProps) {
           <div styleName="right">
             <MyInput
               type="textarea"
-              onChange={(e) => {}}
+              onChange={(e) => updateResumeHook('base/hobby', e.target?.value)}
               rows={5}
               value={hobby || ''}
               placeholder="你有什么特长爱好呢"

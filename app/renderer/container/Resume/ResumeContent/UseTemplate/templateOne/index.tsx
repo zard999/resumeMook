@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 22:40:20
+ * @LastEditTime: 2022-08-25 15:08:35
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/index.tsx
  * @Description: 模板1
  *
@@ -20,12 +20,15 @@ import Skill from './components/Skill';
 import Post from './components/Post';
 import Project from './components/Project';
 import Work from './components/Work';
+import Education from './components/Education';
 import { useAppSelector } from '@store/hooks';
 import { selectResumeToolbarKeys } from '@src/container/Resume/slice';
 import { RESUME_TOOLBAR_MAPS } from '@common/constants/resume';
+import { selectResume } from '@src/container/Resume/slice';
 
 function TemplateOne() {
   const resumeToolbarKeys = useAppSelector(selectResumeToolbarKeys);
+  const { base } = useAppSelector(selectResume);
   // 必须带有id，以方便导出时获取DOM元素内容
   return (
     <div styleName="a4-box">
@@ -38,6 +41,7 @@ function TemplateOne() {
           <div styleName="fillColor" />
           <div styleName="baseData">
             <BaseInfo />
+            {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.education) && <Education />}
             {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.contact) && <Contact />}
             {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.workPrefer) && <Job />}
             {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.certificate) && <Certificate />}
@@ -45,7 +49,7 @@ function TemplateOne() {
         </div>
         {/* 内容 */}
         <div styleName="center">
-          <Synopsis />
+          {(resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.evaluation) || base?.username) && <Synopsis />}
           <div styleName="listData">
             {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.skill) && <Skill />}
             {resumeToolbarKeys.includes(RESUME_TOOLBAR_MAPS.schoolExperience) && <Post />}

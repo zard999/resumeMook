@@ -13,10 +13,12 @@ const initialState: RStore = {
       avatar: '',
       username: '张永辉',
       area: '广东·深圳',
+      hometown: '湖北',
+    },
+    education: {
       school: '湖北瞎说大学',
       major: '计算机科学与技术',
       degree: '本科',
-      hometown: '湖北',
       onSchoolTime: {
         beginTime: '2020.09',
         endTime: '2022.06',

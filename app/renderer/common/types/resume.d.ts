@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:21:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 11:46:32
+ * @LastEditTime: 2022-08-25 15:02:37
  * @FilePath: /resume/app/renderer/common/types/resume.d.ts
  * @Description:
  *
@@ -14,8 +14,11 @@ declare namespace TSResume {
     avatar?: string; // 头像
     username: string; // 姓名
     area?: string; // 地区
-    school?: string; // 学校
+    hometown?: string; // 籍贯
+  }
 
+  // 教育信息
+  export interface Education {
     // 学年
     onSchoolTime?: {
       beginTime: string | number | null; // 入校时间
@@ -23,8 +26,8 @@ declare namespace TSResume {
     };
     major?: string; // 专业
     degree?: string; // 学位
-    hometown?: string; // 籍贯
     political?: string; // 政治面貌
+    school?: string; // 学校
   }
 
   // 联系方式
@@ -77,6 +80,7 @@ declare namespace TSResume {
   // 一份完整的简历信息
   export interface IntactResume {
     base: Base;
+    education: Education;
     skill: string;
     skillList: string[];
     hobby: string;
