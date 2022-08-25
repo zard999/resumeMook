@@ -105,6 +105,12 @@ const resumeSlice = createSlice({
       state.resumeToolbarKeys = resumeToolbarKeys;
       console.log('resumeToolbarKeys', state.resumeToolbarKeys);
     },
+
+    // 修改resume
+    updateResume(state, action) {
+      console.log('updateResume', action);
+      state.resume.base = action.payload;
+    },
   },
 });
 
@@ -113,6 +119,6 @@ export const selectResumeToolbarKeys = (state: RootState) => state.resume.resume
 export const selectResume = (state: RootState) => state.resume.resume;
 
 // 导出reducer
-export const { setResumeToolbarKeys } = resumeSlice.actions;
+export const { setResumeToolbarKeys, updateResume } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
