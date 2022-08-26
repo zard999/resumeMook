@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 13:50:53
+ * @LastEditTime: 2022-08-26 13:58:39
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -117,11 +117,12 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
         return React.cloneElement(child, {
           currentItem,
           onChangeCurrentItem,
+          isDisable: !editModal?.status,
         });
       }
       return child;
     });
-  }, [children, currentItem]);
+  }, [children, currentItem, editModal?.status]);
   return (
     <div styleName="form">
       <div styleName="left-box">

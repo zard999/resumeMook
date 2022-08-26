@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:32:15
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 11:03:25
+ * @LastEditTime: 2022-08-26 13:57:17
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/ProjectExperience/Form.tsx
  * @Description: Form
  *
@@ -15,11 +15,11 @@ import './index.less';
 
 interface IProps {
   currentItem?: AdapterExperienceType;
-  // isDisable?: boolean;
+  isDisable?: boolean;
 }
 
-function Form({ currentItem }: IProps) {
-  console.log('currentItem', currentItem?.post);
+function Form({ currentItem, isDisable }: IProps) {
+  console.log('currentItem', isDisable);
   return (
     <div styleName="wrapper">
       <div styleName="flex">
@@ -27,7 +27,7 @@ function Form({ currentItem }: IProps) {
           <span styleName="require">*</span>项目名 ：
         </div>
         <div styleName="right">
-          <MyInput value={currentItem?.title} placeholder="请输入项目名" />
+          <MyInput value={currentItem?.title} placeholder="请输入项目名" disabled={isDisable} />
         </div>
       </div>
       <div styleName="flex">
@@ -35,7 +35,7 @@ function Form({ currentItem }: IProps) {
           <span styleName="require">*</span>职 位 ：
         </div>
         <div styleName="right">
-          <MyInput value={currentItem?.post} placeholder="在项目中担任什么职位" />
+          <MyInput value={currentItem?.post} placeholder="在项目中担任什么职位" disabled={isDisable} />
         </div>
       </div>
       <div styleName="flex">
@@ -43,9 +43,19 @@ function Form({ currentItem }: IProps) {
           <span styleName="require">*</span>时 间 ：
         </div>
         <div styleName="right">
-          <MyInput value={currentItem?.beginTime} placeholder="请输入开始时间" style={{ width: 290 }} />
+          <MyInput
+            value={currentItem?.beginTime}
+            placeholder="请输入开始时间"
+            style={{ width: 290 }}
+            disabled={isDisable}
+          />
           <span styleName="line">-</span>
-          <MyInput value={currentItem?.endTime} placeholder="请输入结束时间" style={{ width: 290 }} />
+          <MyInput
+            value={currentItem?.endTime}
+            placeholder="请输入结束时间"
+            style={{ width: 290 }}
+            disabled={isDisable}
+          />
         </div>
       </div>
       <div styleName="flex">
@@ -53,7 +63,13 @@ function Form({ currentItem }: IProps) {
           <span styleName="require">*</span>内 容 ：
         </div>
         <div styleName="right">
-          <MyInput type="textarea" rows={5} value={currentItem?.content} placeholder="你在项目中的主要工作是什么呢？" />
+          <MyInput
+            type="textarea"
+            rows={5}
+            value={currentItem?.content}
+            placeholder="你在项目中的主要工作是什么呢？"
+            disabled={isDisable}
+          />
         </div>
       </div>
     </div>
