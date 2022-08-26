@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 16:34:38
+ * @LastEditTime: 2022-08-26 17:17:46
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/components/Project/index.tsx
  * @Description: 项目经验
  *
@@ -17,7 +17,7 @@ function Project() {
   const { projectExperience } = useSelector(selectResume);
   return (
     <div styleName="content">
-      <p styleName="label">项目经验 Project</p>
+      <p styleName="label">项目经历 Project</p>
       <ul styleName="list">
         {projectExperience &&
           projectExperience?.length &&

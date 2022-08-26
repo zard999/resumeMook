@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 15:26:57
+ * @LastEditTime: 2022-08-26 17:05:30
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
@@ -20,6 +20,7 @@ import {
   updateSkill,
   updateEvaluation,
   updateProjectExperience,
+  updateWorkExperience,
 } from '../slice';
 
 /**
@@ -37,6 +38,7 @@ function useUpdateResumeHook() {
   const updateSkill = useUpdateSkillHook();
   const updateEvaluationHook = useUpdateEvaluationHook();
   const updateProjectExperienceHook = useUpdateProjectExperienceHook();
+  const updateWorkExperienceHook = useUpdateWorkExperienceHook();
 
   return <T>(stateKey: string, stateValue: T) => {
     const keys = stateKey.split('/') || [];
@@ -50,6 +52,7 @@ function useUpdateResumeHook() {
       if (keys[0] === 'skill') updateSkill(keys[0], stateValue);
       if (keys[0] === 'evaluation') updateEvaluationHook(keys[0], stateValue);
       if (keys[0] === 'projectExperience') updateProjectExperienceHook(keys[0], stateValue);
+      if (keys[0] === 'workExperience') updateWorkExperienceHook(keys[0], stateValue);
     }
   };
 }
@@ -203,6 +206,30 @@ function useUpdateProjectExperienceHook() {
     });
     dispatch(
       updateProjectExperience({
+        [stateKey]: newList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改工作经验（WorkExperience）
+ * @return {*}
+ */
+function useUpdateWorkExperienceHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    console.log('stateValue', stateValue);
+    let newList = (stateValue as any)?.map((item: AdapterExperienceType) => {
+      let parseContent = item.content ? item.content.split('｜') : [];
+      return {
+        ...item,
+        department: item?.title,
+        parseContent,
+      };
+    });
+    dispatch(
+      updateWorkExperience({
         [stateKey]: newList,
       })
     );

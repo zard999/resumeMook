@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:48:00
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 18:05:29
+ * @LastEditTime: 2022-08-26 17:07:20
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/index.tsx
  * @Description:
  *
@@ -23,6 +23,7 @@ import CertificateForm from './UseForm/Certificate';
 import SkillForm from './UseForm/Skill';
 import EvaluationForm from './UseForm/Evaluation';
 import ProjectExperienceForm from './UseForm/ProjectExperience';
+import WorkExperienceForm from './UseForm/WorkExperience';
 
 function ResumeContent() {
   const HEADER_ACTION_HEIGHT = 92;
@@ -63,6 +64,7 @@ function ResumeContent() {
           {formName === RESUME_TOOLBAR_MAPS.skill && <SkillForm onClose={onClose} />}
           {formName === RESUME_TOOLBAR_MAPS.evaluation && <EvaluationForm onClose={onClose} />}
           {formName === RESUME_TOOLBAR_MAPS.projectExperience && <ProjectExperienceForm onClose={onClose} />}
+          {formName === RESUME_TOOLBAR_MAPS.workExperience && <WorkExperienceForm onClose={onClose} />}
         </>
       )}
     </MyScrollBox>

@@ -76,6 +76,7 @@ const initialState: RStore = {
           '担任TickNet工作室前端工程师，与湖南瞎说大学网络中心合作，围绕微信企业号开发或主导多个应用',
           '任职期间基于微信企业号开发校内闲余市场，采用Vue.js主导开发，并与武汉xxx科技有限公司合作，主导开发该公司官网及后台管理',
         ],
+        date: 1621145137865,
       },
     ],
     projectExperience: [
@@ -153,6 +154,12 @@ const resumeSlice = createSlice({
       console.log('action.payload', action.payload);
       state.resume.projectExperience = action.payload.projectExperience;
     },
+
+    // 修改WorkExperience
+    updateWorkExperience(state, action) {
+      console.log('action.payload', action.payload);
+      state.resume.workExperience = action.payload.workExperience;
+    },
   },
 });
 
@@ -171,6 +178,7 @@ export const {
   updateSkill,
   updateEvaluation,
   updateProjectExperience,
+  updateWorkExperience,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
