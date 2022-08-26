@@ -2,14 +2,21 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 15:22:04
+ * @LastEditTime: 2022-08-24 10:33:16
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
+
+const ROOT_PATH = path.join(app.getAppPath(), '../');
+
+// 监听渲染进程发的消息并回复
+ipcMain.on('get-root-path', (event, arg) => {
+  event.reply('reply-root-path', ROOT_PATH);
+});
 
 function isDev() {
   // 👉 还记得我们配置中通过 webpack.DefinePlugin 定义的构建变量吗
