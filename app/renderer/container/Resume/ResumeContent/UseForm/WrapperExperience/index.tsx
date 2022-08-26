@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 15:50:07
+ * @LastEditTime: 2022-08-26 16:18:57
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -14,7 +14,7 @@ import Right from './Right';
 import Menu from './Right/Menu';
 import './index.less';
 import { AdapterExperienceType } from './adapter';
-import { onAddExperience } from './utils';
+import { onAddExperience, onDeleteExperience } from './utils';
 import MyModal from '@common/components/MyModal';
 interface IProps {
   dataList: any[];
@@ -27,12 +27,16 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   const [currentItem, setCurrentItem] = useState<AdapterExperienceType>({});
   const [experienceList, setExperienceList] = useState<AdapterExperienceType[]>([]);
 
-  // 编辑状态
   const [editModal, setEditModal] = useState({
     status: false, // 编辑状态
     showByCancel: false, // 编辑状态下的取消弹窗
     onAfterFn: () => {}, // 操作之后的还想执行的回调
     tempSaveItem: {}, // 暂时保存的表单数据
+  });
+
+  const [deleteModal, setDeleteModal] = useState({
+    show: false,
+    index: -1,
   });
 
   // 1. 初次当条目列表不为空，默认选中第一条
@@ -136,6 +140,27 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     onToggleEditModal({ status: false });
   }, [editModal?.tempSaveItem]);
 
+  // 9. 删除当前项
+  const onDeleteItem = (index: number) => {
+    setDeleteModal({
+      show: true,
+      index,
+    });
+  };
+
+  // 10. 取消删除当前项
+  const onDeleteCancel = useCallback(() => setDeleteModal({ show: false, index: -1 }), [currentIndex, deleteModal]);
+
+  // 11. 成功删除当前项
+  const onDeleteOk = useCallback(() => {
+    const newList = onDeleteExperience(deleteModal?.index, experienceList);
+    if (newList.length > 0) setCurrentIndex(0);
+    else setCurrentIndex(-1);
+    setDeleteModal({ show: false, index: -1 });
+    setExperienceList(newList);
+    updateDataList && updateDataList(newList);
+  }, [currentIndex, deleteModal]);
+
   const newChildren = useMemo(() => {
     return React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
@@ -152,7 +177,13 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   return (
     <div styleName="form">
       <div styleName="left-box">
-        <Left currentIndex={currentIndex} experienceList={experienceList} onAdd={onAddItem} onChange={onChangeItem} />
+        <Left
+          currentIndex={currentIndex}
+          experienceList={experienceList}
+          onAdd={onAddItem}
+          onChange={onChangeItem}
+          onDelete={onDeleteItem}
+        />
       </div>
       <div styleName="right-box">
         <Right>
@@ -166,6 +197,23 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
           {newChildren}
         </Right>
       </div>
+
+      {deleteModal?.show && (
+        <MyModal.Confirm
+          title="确定删除条目吗？"
+          description="删除后将无法恢复哦～"
+          config={{
+            cancelBtn: {
+              isShow: true,
+              callback: onDeleteCancel,
+            },
+            submitBtn: {
+              isShow: true,
+              callback: onDeleteOk,
+            },
+          }}
+        />
+      )}
 
       {editModal?.showByCancel && (
         <MyModal.Confirm
