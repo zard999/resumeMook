@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 15:20:23
+ * @LastEditTime: 2022-08-26 15:38:16
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -88,6 +88,11 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   const onChangeItem = useCallback(
     (index: number) => {
       if (editModal?.status) {
+        // 5.1 当前正在编辑状态
+        onToggleEditModal({
+          showByCancel: true,
+          onAfterFn: () => setCurrentIndex(index),
+        });
         console.log('不能切换');
       } else {
         setCurrentIndex(index);
