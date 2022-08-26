@@ -62,6 +62,7 @@ const initialState: RStore = {
           '计划、组织、协调各年级学生组织的文艺和文化娱乐活动',
           '承办好学生会部的学生文艺晚会。有效地与社团部开展合作项目',
         ],
+        date: 1621145137865,
       },
     ],
     workExperience: [
@@ -160,6 +161,12 @@ const resumeSlice = createSlice({
       console.log('action.payload', action.payload);
       state.resume.workExperience = action.payload.workExperience;
     },
+
+    // 修改SchoolExperience
+    updateSchoolExperience(state, action) {
+      console.log('action.payload', action.payload);
+      state.resume.schoolExperience = action.payload.schoolExperience;
+    },
   },
 });
 
@@ -179,6 +186,7 @@ export const {
   updateEvaluation,
   updateProjectExperience,
   updateWorkExperience,
+  updateSchoolExperience,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

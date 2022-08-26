@@ -43,6 +43,17 @@ const AdapterExperience = {
     });
     return experienceList;
   },
+
+  // 在校经历
+  school(list: TSResume.SchoolExperience[]): AdapterExperienceType[] {
+    const experienceList: AdapterExperienceType[] = list.map((item: TSResume.SchoolExperience) => {
+      return {
+        ...item,
+        title: item.department,
+      };
+    });
+    return experienceList;
+  },
 };
 
 export default AdapterExperience;

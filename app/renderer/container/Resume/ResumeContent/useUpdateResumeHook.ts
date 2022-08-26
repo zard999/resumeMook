@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 17:05:30
+ * @LastEditTime: 2022-08-26 17:34:53
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
@@ -21,6 +21,7 @@ import {
   updateEvaluation,
   updateProjectExperience,
   updateWorkExperience,
+  updateSchoolExperience,
 } from '../slice';
 
 /**
@@ -39,6 +40,7 @@ function useUpdateResumeHook() {
   const updateEvaluationHook = useUpdateEvaluationHook();
   const updateProjectExperienceHook = useUpdateProjectExperienceHook();
   const updateWorkExperienceHook = useUpdateWorkExperienceHook();
+  const updateSchoolExperienceHook = useUpdateSchoolExperienceHook();
 
   return <T>(stateKey: string, stateValue: T) => {
     const keys = stateKey.split('/') || [];
@@ -53,6 +55,7 @@ function useUpdateResumeHook() {
       if (keys[0] === 'evaluation') updateEvaluationHook(keys[0], stateValue);
       if (keys[0] === 'projectExperience') updateProjectExperienceHook(keys[0], stateValue);
       if (keys[0] === 'workExperience') updateWorkExperienceHook(keys[0], stateValue);
+      if (keys[0] === 'schoolExperience') updateSchoolExperienceHook(keys[0], stateValue);
     }
   };
 }
@@ -230,6 +233,30 @@ function useUpdateWorkExperienceHook() {
     });
     dispatch(
       updateWorkExperience({
+        [stateKey]: newList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改在校经历（SchoolExperience）
+ * @return {*}
+ */
+function useUpdateSchoolExperienceHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    console.log('stateValue', stateValue);
+    let newList = (stateValue as any)?.map((item: AdapterExperienceType) => {
+      let parseContent = item.content ? item.content.split('｜') : [];
+      return {
+        ...item,
+        department: item?.title,
+        parseContent,
+      };
+    });
+    dispatch(
+      updateSchoolExperience({
         [stateKey]: newList,
       })
     );
