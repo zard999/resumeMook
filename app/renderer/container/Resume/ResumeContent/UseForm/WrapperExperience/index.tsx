@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 11:03:09
+ * @LastEditTime: 2022-08-26 11:25:46
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -25,6 +25,11 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   const [currentIndex, setCurrentIndex] = useState(-1);
   const [currentItem, setCurrentItem] = useState<AdapterExperienceType>({});
   const [experienceList, setExperienceList] = useState<AdapterExperienceType[]>([]);
+
+  // 编辑状态
+  const [editModal, setEditModal] = useState({
+    status: false, // 编辑状态
+  });
 
   // 1. 初次当条目列表不为空，默认选中第一条
   useEffect(() => {
@@ -66,6 +71,14 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     [currentItem]
   );
 
+  // 修改编辑状态
+  const onToggleEditModal = useCallback(
+    (config) => {
+      setEditModal((prev) => ({ ...prev, ...config }));
+    },
+    [editModal]
+  );
+
   const newChildren = useMemo(() => {
     return React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
@@ -85,7 +98,11 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
       </div>
       <div styleName="right-box">
         <Right>
-          <Menu currentItem={currentItem} />
+          <Menu
+            isEdit={editModal?.status}
+            currentItem={currentItem}
+            onChangeEditStatus={() => onToggleEditModal({ status: true })}
+          />
           {newChildren}
         </Right>
       </div>
