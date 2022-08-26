@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 11:37:53
+ * @LastEditTime: 2022-08-26 11:59:08
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -31,6 +31,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   const [editModal, setEditModal] = useState({
     status: false, // 编辑状态
     showByCancel: false, // 编辑状态下的取消弹窗
+    onAfterFn: () => {}, // 操作之后的还想执行的回调
   });
 
   // 1. 初次当条目列表不为空，默认选中第一条
@@ -58,11 +59,27 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
 
   // 4. 添加条目
   const onAddItem = () => {
-    const newExperienceList = onAddExperience(experienceList);
-    if (newExperienceList.length > 0) {
-      setCurrentIndex(0);
-      setExperienceList(newExperienceList);
-      updateDataList && updateDataList(newExperienceList);
+    // 编辑状态下添加
+    if (editModal?.status) {
+      onToggleEditModal({
+        showByCancel: true,
+        onAfterFn: () => {
+          const newExperienceList = onAddExperience(experienceList);
+          if (newExperienceList.length > 0) {
+            // 定位激活刚添加的这条数据
+            setCurrentIndex(0);
+            setExperienceList(newExperienceList);
+            updateDataList && updateDataList(newExperienceList);
+          }
+        },
+      });
+    } else {
+      const newExperienceList = onAddExperience(experienceList);
+      if (newExperienceList.length > 0) {
+        setCurrentIndex(0);
+        setExperienceList(newExperienceList);
+        updateDataList && updateDataList(newExperienceList);
+      }
     }
   };
 
@@ -125,6 +142,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
               isShow: true,
               callback: () => {
                 onToggleEditModal({ showByCancel: false, status: false });
+                editModal?.onAfterFn && editModal?.onAfterFn();
               },
             },
           }}
