@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:32:15
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 10:10:52
+ * @LastEditTime: 2022-08-26 11:03:25
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/ProjectExperience/Form.tsx
  * @Description: Form
  *
@@ -19,7 +19,7 @@ interface IProps {
 }
 
 function Form({ currentItem }: IProps) {
-  console.log('currentItem', currentItem);
+  console.log('currentItem', currentItem?.post);
   return (
     <div styleName="wrapper">
       <div styleName="flex">

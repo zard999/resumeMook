@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 10:01:12
+ * @LastEditTime: 2022-08-26 11:03:09
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -14,6 +14,7 @@ import Right from './Right';
 import Menu from './Right/Menu';
 import './index.less';
 import { AdapterExperienceType } from './adapter';
+import { onAddExperience } from './utils';
 interface IProps {
   dataList: any[];
   children: React.ReactNode;
@@ -48,6 +49,16 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     }
   }, [currentIndex, experienceList]);
 
+  // 4. 添加条目
+  const onAddItem = () => {
+    const newExperienceList = onAddExperience(experienceList);
+    if (newExperienceList.length > 0) {
+      setCurrentIndex(0);
+      setExperienceList(newExperienceList);
+      updateDataList && updateDataList(newExperienceList);
+    }
+  };
+
   const onChangeCurrentItem = useCallback(
     (newValue) => {
       // 当条数据源更新，同步更新整个数组，执行updateDataList方法
@@ -70,7 +81,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   return (
     <div styleName="form">
       <div styleName="left-box">
-        <Left currentIndex={currentIndex} experienceList={experienceList} onAdd={() => {}} />
+        <Left currentIndex={currentIndex} experienceList={experienceList} onAdd={onAddItem} />
       </div>
       <div styleName="right-box">
         <Right>

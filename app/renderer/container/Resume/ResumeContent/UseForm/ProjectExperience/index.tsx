@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:00:43
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 23:55:00
+ * @LastEditTime: 2022-08-26 10:39:53
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/ProjectExperience/index.tsx
  * @Description: 项目经验弹窗
  *
@@ -22,7 +22,7 @@ function ProjectExperience({ onClose }: IProps) {
   const updateResumeHook = useUpdateResumeHook();
   const { projectExperience } = useAppSelector(selectResume);
 
-  const updateDataList = (newDataList: any[]) => updateResumeHook('projectExperience', newDataList);
+  const updateDataList = (newDataList: AdapterExperienceType[]) => updateResumeHook('projectExperience', newDataList);
 
   return (
     <MyModal.Dialog

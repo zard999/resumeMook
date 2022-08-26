@@ -2,13 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 09:27:05
+ * @LastEditTime: 2022-08-26 11:00:26
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import { useAppDispatch, useAppSelector } from '@src/store/hooks';
+import { AdapterExperienceType } from './UseForm/WrapperExperience/adapter';
 import {
   selectResume,
   updateBase,
@@ -191,9 +192,15 @@ function useUpdateEvaluationHook() {
 function useUpdateProjectExperienceHook() {
   const dispatch = useAppDispatch();
   return <T>(stateKey: string, stateValue: T) => {
+    let newList = (stateValue as any)?.map((item: AdapterExperienceType) => {
+      return {
+        ...item,
+        projectName: item?.title,
+      };
+    });
     dispatch(
       updateProjectExperience({
-        [stateKey]: stateValue,
+        [stateKey]: newList,
       })
     );
   };

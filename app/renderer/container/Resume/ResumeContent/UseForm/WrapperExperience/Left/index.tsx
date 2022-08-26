@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 18:17:51
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 09:44:51
+ * @LastEditTime: 2022-08-26 10:27:28
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/Left/index.tsx
  * @Description: 专门服务于经验弹窗左侧
  *
@@ -19,14 +19,14 @@ interface IProps extends IListProps {
   onAdd: () => void;
 }
 
-function Left({ currentIndex, experienceList }: IProps) {
+function Left({ currentIndex, experienceList, onAdd }: IProps) {
   return (
     <div styleName="layout-left">
       <MyScrollBox maxHeight={420}>
         <List currentIndex={currentIndex} experienceList={experienceList} />
       </MyScrollBox>
       <div styleName="action">
-        <MyButton width={112} size="middle">
+        <MyButton width={112} size="middle" onClick={onAdd}>
           添加条目
         </MyButton>
       </div>

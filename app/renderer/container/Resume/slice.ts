@@ -151,7 +151,7 @@ const resumeSlice = createSlice({
     // 修改ProjectExperience
     updateProjectExperience(state, action) {
       console.log('action.payload', action.payload);
-      state.resume.projectExperience = action.payload;
+      state.resume.projectExperience = action.payload.projectExperience;
     },
   },
 });
