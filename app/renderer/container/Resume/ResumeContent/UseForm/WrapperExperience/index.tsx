@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 15:38:16
+ * @LastEditTime: 2022-08-26 15:50:07
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -101,7 +101,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     [editModal]
   );
 
-  // 暂时修改当前form内容
+  // 6. 暂时修改当前form内容
   const onChangeCurrentItem = useCallback(
     (newItem: AdapterExperienceType) => {
       // 为了暂时让Form表单显示的数据实时性和一致性
@@ -113,7 +113,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     [currentItem]
   );
 
-  // 修改编辑状态
+  // 7. 修改编辑状态
   const onToggleEditModal = useCallback(
     (config) => {
       setEditModal((prev) => ({ ...prev, ...config }));
@@ -121,7 +121,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     [editModal]
   );
 
-  // 保存编辑状态
+  // 8. 保存编辑状态
   const onSaveEditValue = useCallback(() => {
     // editModal被缓存了，必须引入依赖项editModal
     // 1.获取暂时保存的数据
@@ -183,6 +183,9 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
               callback: () => {
                 onToggleEditModal({ showByCancel: false, status: false });
                 editModal?.onAfterFn && editModal?.onAfterFn();
+
+                // 取消之后重新设置当前当前项以恢复之前的数据
+                setCurrentItem(experienceList[currentIndex]);
               },
             },
           }}
