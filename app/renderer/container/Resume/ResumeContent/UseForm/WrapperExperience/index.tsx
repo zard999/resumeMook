@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 16:18:57
+ * @LastEditTime: 2022-08-26 16:30:06
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -112,6 +112,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
       onToggleEditModal({
         tempSaveItem: { ...newItem },
       });
+      // 这只是修改了当前form的值，并没有修改redux中的值，所以后面取消的时候直接拿redux中的值即可，redux中的值只能靠 updateDataList 修改
       setCurrentItem(newItem);
     },
     [currentItem]
@@ -134,7 +135,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     let newList = [...experienceList];
     // 3.修改当前索引的数据
     newList[currentIndex] = newItem;
-    // 4.更新
+    // 4.更新redux中的值
     updateDataList(newList);
     // 5.修改编辑状态
     onToggleEditModal({ status: false });
