@@ -42,7 +42,7 @@ function Project() {
                   {experience?.parseContent &&
                     experience?.parseContent?.length > 0 &&
                     experience?.parseContent?.map((value: string, index: number) => (
-                      <li styleName="item-content">
+                      <li styleName="item-content" key={value + String(index)}>
                         <span>{value}</span>
                       </li>
                     ))}

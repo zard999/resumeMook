@@ -2,14 +2,17 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 17:29:42
+ * @LastEditTime: 2022-08-26 09:18:37
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import React, { useCallback, useState, useMemo } from 'react';
-
+import Left from './Left';
+import Right from './Right';
+import Menu from './Right/Menu';
+import './index.less';
 interface IProps {
   dataList: any[];
   children: React.ReactNode;
@@ -40,7 +43,19 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
       }
       return child;
     });
-  }, [children, dataList]);
-  return <div styleName="wrapper">{newChildren}</div>;
+  }, [children, currentItem]);
+  return (
+    <div styleName="form">
+      <div styleName="left-box">
+        <Left />
+      </div>
+      <div styleName="right-box">
+        <Right>
+          <Menu />
+          {newChildren}
+        </Right>
+      </div>
+    </div>
+  );
 }
 export default WrapperExperience;

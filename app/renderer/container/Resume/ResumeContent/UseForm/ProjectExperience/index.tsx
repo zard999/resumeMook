@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:00:43
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 18:02:45
+ * @LastEditTime: 2022-08-25 23:55:00
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/ProjectExperience/index.tsx
  * @Description: 项目经验弹窗
  *
@@ -16,15 +16,26 @@ import useUpdateResumeHook from '@src/container/Resume/ResumeContent/useUpdateRe
 import { useAppSelector } from '@store/hooks';
 import { selectResume } from '../../../slice';
 import AdapterExperience, { AdapterExperienceType } from '../WrapperExperience/adapter';
+import { IProps } from '../types';
 
-function ProjectExperience() {
+function ProjectExperience({ onClose }: IProps) {
   const updateResumeHook = useUpdateResumeHook();
   const { projectExperience } = useAppSelector(selectResume);
 
   const updateDataList = (newDataList: any[]) => updateResumeHook('projectExperience', newDataList);
 
   return (
-    <MyModal.Dialog title="项目经验">
+    <MyModal.Dialog
+      title="项目经验"
+      showFooter={false}
+      config={{
+        cancelBtn: {
+          callback: onClose,
+        },
+      }}
+      width={960}
+      childStyle={{ padding: 0 }}
+    >
       <WrapperExperience
         dataList={AdapterExperience.project(projectExperience as AdapterExperienceType[])}
         updateDataList={updateDataList}
