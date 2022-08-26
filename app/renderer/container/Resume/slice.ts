@@ -147,6 +147,12 @@ const resumeSlice = createSlice({
       state.resume.evaluation = evaluation;
       state.resume.evaluationList = evaluationList;
     },
+
+    // 修改ProjectExperience
+    updateProjectExperience(state, action) {
+      console.log('action.payload', action.payload);
+      state.resume.projectExperience = action.payload;
+    },
   },
 });
 
@@ -164,6 +170,7 @@ export const {
   updateWork,
   updateSkill,
   updateEvaluation,
+  updateProjectExperience,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;
