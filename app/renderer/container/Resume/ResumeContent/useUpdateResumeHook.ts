@@ -2,13 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 16:51:32
+ * @LastEditTime: 2022-08-26 17:55:56
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import { useAppDispatch, useAppSelector } from '@src/store/hooks';
+import { AdapterExperienceType } from './UseForm/WrapperExperience/adapter';
 import {
   selectResume,
   updateBase,
@@ -18,6 +19,10 @@ import {
   updateWork,
   updateSkill,
   updateEvaluation,
+  updateProjectExperience,
+  updateWorkExperience,
+  updateSchoolExperience,
+  updateHobby,
 } from '../slice';
 
 /**
@@ -34,6 +39,10 @@ function useUpdateResumeHook() {
   const updateWork = useUpdateWorkHook();
   const updateSkill = useUpdateSkillHook();
   const updateEvaluationHook = useUpdateEvaluationHook();
+  const updateProjectExperienceHook = useUpdateProjectExperienceHook();
+  const updateWorkExperienceHook = useUpdateWorkExperienceHook();
+  const updateSchoolExperienceHook = useUpdateSchoolExperienceHook();
+  const updateHobbyHook = useUpdateHobbyHook();
 
   return <T>(stateKey: string, stateValue: T) => {
     const keys = stateKey.split('/') || [];
@@ -46,6 +55,10 @@ function useUpdateResumeHook() {
       if (keys[0] === 'work') updateWork(keys[1], stateValue);
       if (keys[0] === 'skill') updateSkill(keys[0], stateValue);
       if (keys[0] === 'evaluation') updateEvaluationHook(keys[0], stateValue);
+      if (keys[0] === 'projectExperience') updateProjectExperienceHook(keys[0], stateValue);
+      if (keys[0] === 'workExperience') updateWorkExperienceHook(keys[0], stateValue);
+      if (keys[0] === 'schoolExperience') updateSchoolExperienceHook(keys[0], stateValue);
+      if (keys[0] === 'hobby') updateHobbyHook(keys[0], stateValue);
     }
   };
 }
@@ -176,6 +189,93 @@ function useUpdateEvaluationHook() {
       updateEvaluation({
         [stateKey]: stateValue,
         evaluationList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改项目经验（ProjectExperience）
+ * @return {*}
+ */
+function useUpdateProjectExperienceHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    console.log('stateValue', stateValue);
+    let newList = (stateValue as any)?.map((item: AdapterExperienceType) => {
+      let parseContent = item.content ? item.content.split('｜') : [];
+      return {
+        ...item,
+        projectName: item?.title,
+        parseContent,
+      };
+    });
+    dispatch(
+      updateProjectExperience({
+        [stateKey]: newList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改工作经验（WorkExperience）
+ * @return {*}
+ */
+function useUpdateWorkExperienceHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    console.log('stateValue', stateValue);
+    let newList = (stateValue as any)?.map((item: AdapterExperienceType) => {
+      let parseContent = item.content ? item.content.split('｜') : [];
+      return {
+        ...item,
+        department: item?.title,
+        parseContent,
+      };
+    });
+    dispatch(
+      updateWorkExperience({
+        [stateKey]: newList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改在校经历（SchoolExperience）
+ * @return {*}
+ */
+function useUpdateSchoolExperienceHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    console.log('stateValue', stateValue);
+    let newList = (stateValue as any)?.map((item: AdapterExperienceType) => {
+      let parseContent = item.content ? item.content.split('｜') : [];
+      return {
+        ...item,
+        department: item?.title,
+        parseContent,
+      };
+    });
+    dispatch(
+      updateSchoolExperience({
+        [stateKey]: newList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改兴趣（hobby）
+ * @return {*}
+ */
+function useUpdateHobbyHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    dispatch(
+      updateHobby({
+        [stateKey]: stateValue,
       })
     );
   };

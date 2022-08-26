@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 16:28:41
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 23:28:19
+ * @LastEditTime: 2022-08-26 16:48:07
  * @FilePath: /resume/app/renderer/common/constants/resume.ts
  * @Description: 简历常量
  *
@@ -14,7 +14,7 @@ export const RESUME_TOOLBAR_MAPS = {
   contact: 'contact', // 联系方式
   workPrefer: 'workPrefer', // 求职意向
   schoolExperience: 'schoolExperience', // 在校经历
-  projectExperience: 'projectExperience', // 项目经验
+  projectExperience: 'projectExperience', // 项目经历
   workExperience: 'workExperience', // 工作经历
   certificate: 'certificate', // 获奖证书
   evaluation: 'evaluation', // 个人评价
@@ -55,7 +55,7 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
   },
   {
     key: RESUME_TOOLBAR_MAPS.projectExperience,
-    name: '项目经验',
+    name: '项目经历',
     summary: '展示研究过什么优秀项目和成果',
     require: false,
   },

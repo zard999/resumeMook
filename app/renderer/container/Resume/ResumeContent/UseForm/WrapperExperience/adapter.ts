@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:42:01
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 17:59:54
+ * @LastEditTime: 2022-08-26 16:58:33
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/adapter.ts
  * @Description: 适配器模块：将不同数据适配成 List 组件所需的数据格式，本质就是求并集
  *
@@ -28,6 +28,28 @@ const AdapterExperience = {
       return {
         ...item,
         title: item.projectName,
+      };
+    });
+    return experienceList;
+  },
+
+  // 工作经验
+  work(list: TSResume.WorkExperience[]): AdapterExperienceType[] {
+    const experienceList: AdapterExperienceType[] = list.map((item: TSResume.WorkExperience) => {
+      return {
+        ...item,
+        title: item.department,
+      };
+    });
+    return experienceList;
+  },
+
+  // 在校经历
+  school(list: TSResume.SchoolExperience[]): AdapterExperienceType[] {
+    const experienceList: AdapterExperienceType[] = list.map((item: TSResume.SchoolExperience) => {
+      return {
+        ...item,
+        title: item.department,
       };
     });
     return experienceList;

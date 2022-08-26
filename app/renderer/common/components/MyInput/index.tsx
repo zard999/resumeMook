@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 11:42:43
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 14:01:34
+ * @LastEditTime: 2022-08-26 11:14:54
  * @FilePath: /resume/app/renderer/common/components/MyInput/index.tsx
  * @Description: 封装Input组件
  *
@@ -71,11 +71,12 @@ export default class MyInput extends React.PureComponent<InputProps, InputState>
   // getDerivedStateFromProps内部访问不到this
   UNSAFE_componentWillReceiveProps(nextProps: InputProps) {
     // 检测父组件的props是否改变
-    if (nextProps.value) {
-      this.setState({
-        text: nextProps.value,
-      });
-    }
+    // if (nextProps.value) {
+    // 修复为空的情况下不改变
+    this.setState({
+      text: nextProps.value || '',
+    });
+    // }
   }
 
   focus = () => {
