@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 23:12:50
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 14:42:12
+ * @LastEditTime: 2022-08-26 17:52:22
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/BaseInfo/index.tsx
  * @Description: 基本信息
  *
@@ -69,7 +69,7 @@ function BaseInfo({ onClose }: IProps) {
           <div styleName="right">
             <MyInput
               type="textarea"
-              onChange={(e) => updateResumeHook('base/hobby', e.target?.value)}
+              onChange={(e) => updateResumeHook('hobby', e.target?.value)}
               rows={5}
               value={hobby || ''}
               placeholder="你有什么特长爱好呢"
