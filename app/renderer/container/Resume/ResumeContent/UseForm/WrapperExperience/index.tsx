@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 12:38:51
+ * @LastEditTime: 2022-08-26 13:50:53
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -83,6 +83,18 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     }
   };
 
+  // 5. 切换条目
+  const onChangeItem = useCallback(
+    (index: number) => {
+      if (editModal?.status) {
+        console.log('不能切换');
+      } else {
+        setCurrentIndex(index);
+      }
+    },
+    [editModal]
+  );
+
   const onChangeCurrentItem = useCallback(
     (newValue) => {
       // 当条数据源更新，同步更新整个数组，执行updateDataList方法
@@ -113,7 +125,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   return (
     <div styleName="form">
       <div styleName="left-box">
-        <Left currentIndex={currentIndex} experienceList={experienceList} onAdd={onAddItem} />
+        <Left currentIndex={currentIndex} experienceList={experienceList} onAdd={onAddItem} onChange={onChangeItem} />
       </div>
       <div styleName="right-box">
         <Right>
