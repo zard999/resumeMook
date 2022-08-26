@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 16:30:06
+ * @LastEditTime: 2022-08-26 16:40:24
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -187,16 +187,18 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
         />
       </div>
       <div styleName="right-box">
-        <Right>
-          <Menu
-            isEdit={editModal?.status}
-            currentItem={currentItem}
-            onChangeEditStatus={() => onToggleEditModal({ status: true, tempSaveItem: { ...currentItem } })}
-            onCancelEditValue={() => onToggleEditModal({ showByCancel: true })}
-            onSaveEditValue={onSaveEditValue}
-          />
-          {newChildren}
-        </Right>
+        {experienceList.length > 0 && (
+          <Right>
+            <Menu
+              isEdit={editModal?.status}
+              currentItem={currentItem}
+              onChangeEditStatus={() => onToggleEditModal({ status: true, tempSaveItem: { ...currentItem } })}
+              onCancelEditValue={() => onToggleEditModal({ showByCancel: true })}
+              onSaveEditValue={onSaveEditValue}
+            />
+            {newChildren}
+          </Right>
+        )}
       </div>
 
       {deleteModal?.show && (

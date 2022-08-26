@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 18:17:51
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 15:57:20
+ * @LastEditTime: 2022-08-26 16:37:56
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/Left/index.tsx
  * @Description: 专门服务于经验弹窗左侧
  *
@@ -22,14 +22,29 @@ interface IProps extends IListProps {
 function Left({ currentIndex, experienceList, onAdd, onChange, onDelete }: IProps) {
   return (
     <div styleName="layout-left">
-      <MyScrollBox maxHeight={420}>
-        <List currentIndex={currentIndex} experienceList={experienceList} onChange={onChange} onDelete={onDelete} />
-      </MyScrollBox>
-      <div styleName="action">
-        <MyButton width={112} size="middle" onClick={onAdd}>
-          添加条目
-        </MyButton>
-      </div>
+      {experienceList.length > 0 && (
+        <>
+          <MyScrollBox maxHeight={420}>
+            <List currentIndex={currentIndex} experienceList={experienceList} onChange={onChange} onDelete={onDelete} />
+          </MyScrollBox>
+          <div styleName="action">
+            <MyButton width={112} size="middle" onClick={onAdd}>
+              添加条目
+            </MyButton>
+          </div>
+        </>
+      )}
+
+      {experienceList.length === 0 && (
+        <div styleName="empty">
+          <div styleName="empty-tips">还没有内容，快添加一下吧～</div>
+          <div styleName="empty-action">
+            <MyButton width={112} size="middle" onClick={onAdd}>
+              添加条目
+            </MyButton>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
