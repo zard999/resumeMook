@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 18:29:49
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 11:31:51
+ * @LastEditTime: 2022-08-26 15:05:42
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/Right/Menu/index.tsx
  * @Description: 右侧顶部按钮菜单
  *
@@ -16,8 +16,9 @@ interface IProps {
   isEdit: boolean; // 编辑状态
   onChangeEditStatus: () => void; // 点击编辑进入编辑状态
   onCancelEditValue: () => void; // 取消当前内容
+  onSaveEditValue: () => void; // 保存当前内容
 }
-function Menu({ currentItem, isEdit, onChangeEditStatus, onCancelEditValue }: IProps) {
+function Menu({ currentItem, isEdit, onChangeEditStatus, onCancelEditValue, onSaveEditValue }: IProps) {
   return (
     <div styleName="menu">
       <div styleName="left">
@@ -29,7 +30,9 @@ function Menu({ currentItem, isEdit, onChangeEditStatus, onCancelEditValue }: IP
             <div styleName="btn cancel" onClick={onCancelEditValue}>
               取消
             </div>
-            <div styleName="btn save">保存</div>
+            <div styleName="btn save" onClick={onSaveEditValue}>
+              保存
+            </div>
           </>
         )}
 

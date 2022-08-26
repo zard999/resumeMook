@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:32:15
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 14:36:26
+ * @LastEditTime: 2022-08-26 15:23:26
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/ProjectExperience/Form.tsx
  * @Description: Form
  *
@@ -45,7 +45,12 @@ function Form({ currentItem, isDisable, onChangeCurrentItem }: IProps) {
           <span styleName="require">*</span>职 位 ：
         </div>
         <div styleName="right">
-          <MyInput value={currentItem?.post} placeholder="在项目中担任什么职位" disabled={isDisable} />
+          <MyInput
+            value={currentItem?.post}
+            onChange={(e) => onChangeValue('post', e.target?.value || '')}
+            placeholder="在项目中担任什么职位"
+            disabled={isDisable}
+          />
         </div>
       </div>
       <div styleName="flex">
@@ -55,6 +60,7 @@ function Form({ currentItem, isDisable, onChangeCurrentItem }: IProps) {
         <div styleName="right">
           <MyInput
             value={currentItem?.beginTime}
+            onChange={(e) => onChangeValue('beginTime', e.target?.value || '')}
             placeholder="请输入开始时间"
             style={{ width: 290 }}
             disabled={isDisable}
@@ -62,6 +68,7 @@ function Form({ currentItem, isDisable, onChangeCurrentItem }: IProps) {
           <span styleName="line">-</span>
           <MyInput
             value={currentItem?.endTime}
+            onChange={(e) => onChangeValue('endTime', e.target?.value || '')}
             placeholder="请输入结束时间"
             style={{ width: 290 }}
             disabled={isDisable}
@@ -76,6 +83,7 @@ function Form({ currentItem, isDisable, onChangeCurrentItem }: IProps) {
           <MyInput
             type="textarea"
             rows={5}
+            onChange={(e) => onChangeValue('content', e.target?.value || '')}
             value={currentItem?.content}
             placeholder="你在项目中的主要工作是什么呢？"
             disabled={isDisable}

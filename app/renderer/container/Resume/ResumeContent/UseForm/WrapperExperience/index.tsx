@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 14:55:23
+ * @LastEditTime: 2022-08-26 15:20:23
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -116,6 +116,21 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     [editModal]
   );
 
+  // 保存编辑状态
+  const onSaveEditValue = useCallback(() => {
+    // editModal被缓存了，必须引入依赖项editModal
+    // 1.获取暂时保存的数据
+    let newItem = editModal?.tempSaveItem ? { ...editModal?.tempSaveItem } : { ...currentItem };
+    // 2.获取当前数据数组
+    let newList = [...experienceList];
+    // 3.修改当前索引的数据
+    newList[currentIndex] = newItem;
+    // 4.更新
+    updateDataList(newList);
+    // 5.修改编辑状态
+    onToggleEditModal({ status: false });
+  }, [editModal?.tempSaveItem]);
+
   const newChildren = useMemo(() => {
     return React.Children.map(children, (child) => {
       if (React.isValidElement(child)) {
@@ -139,8 +154,9 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
           <Menu
             isEdit={editModal?.status}
             currentItem={currentItem}
-            onChangeEditStatus={() => onToggleEditModal({ status: true })}
+            onChangeEditStatus={() => onToggleEditModal({ status: true, tempSaveItem: { ...currentItem } })}
             onCancelEditValue={() => onToggleEditModal({ showByCancel: true })}
+            onSaveEditValue={onSaveEditValue}
           />
           {newChildren}
         </Right>

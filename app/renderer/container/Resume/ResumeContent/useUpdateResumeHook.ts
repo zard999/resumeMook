@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 11:00:26
+ * @LastEditTime: 2022-08-26 15:26:57
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
@@ -192,10 +192,13 @@ function useUpdateEvaluationHook() {
 function useUpdateProjectExperienceHook() {
   const dispatch = useAppDispatch();
   return <T>(stateKey: string, stateValue: T) => {
+    console.log('stateValue', stateValue);
     let newList = (stateValue as any)?.map((item: AdapterExperienceType) => {
+      let parseContent = item.content ? item.content.split('｜') : [];
       return {
         ...item,
         projectName: item?.title,
+        parseContent,
       };
     });
     dispatch(
