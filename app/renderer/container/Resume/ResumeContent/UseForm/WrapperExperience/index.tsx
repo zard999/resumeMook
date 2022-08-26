@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 11:59:08
+ * @LastEditTime: 2022-08-26 12:38:51
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -135,7 +135,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
             cancelBtn: {
               isShow: true,
               callback: () => {
-                onToggleEditModal({ showByCancel: false });
+                onToggleEditModal({ showByCancel: false, onAfterFn: () => {} });
               },
             },
             submitBtn: {
