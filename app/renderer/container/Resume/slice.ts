@@ -167,6 +167,12 @@ const resumeSlice = createSlice({
       console.log('action.payload', action.payload);
       state.resume.schoolExperience = action.payload.schoolExperience;
     },
+
+    // 修改Hobby
+    updateHobby(state, action) {
+      console.log('action.payload', action.payload);
+      state.resume.hobby = action.payload.hobby;
+    },
   },
 });
 
@@ -187,6 +193,7 @@ export const {
   updateProjectExperience,
   updateWorkExperience,
   updateSchoolExperience,
+  updateHobby,
 } = resumeSlice.actions;
 
 export default resumeSlice.reducer;

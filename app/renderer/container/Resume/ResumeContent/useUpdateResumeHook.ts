@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 13:52:16
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 17:34:53
+ * @LastEditTime: 2022-08-26 17:55:56
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/useUpdateResumeHook.ts
  * @Description: 更新简历hook
  *
@@ -22,6 +22,7 @@ import {
   updateProjectExperience,
   updateWorkExperience,
   updateSchoolExperience,
+  updateHobby,
 } from '../slice';
 
 /**
@@ -41,6 +42,7 @@ function useUpdateResumeHook() {
   const updateProjectExperienceHook = useUpdateProjectExperienceHook();
   const updateWorkExperienceHook = useUpdateWorkExperienceHook();
   const updateSchoolExperienceHook = useUpdateSchoolExperienceHook();
+  const updateHobbyHook = useUpdateHobbyHook();
 
   return <T>(stateKey: string, stateValue: T) => {
     const keys = stateKey.split('/') || [];
@@ -56,6 +58,7 @@ function useUpdateResumeHook() {
       if (keys[0] === 'projectExperience') updateProjectExperienceHook(keys[0], stateValue);
       if (keys[0] === 'workExperience') updateWorkExperienceHook(keys[0], stateValue);
       if (keys[0] === 'schoolExperience') updateSchoolExperienceHook(keys[0], stateValue);
+      if (keys[0] === 'hobby') updateHobbyHook(keys[0], stateValue);
     }
   };
 }
@@ -258,6 +261,21 @@ function useUpdateSchoolExperienceHook() {
     dispatch(
       updateSchoolExperience({
         [stateKey]: newList,
+      })
+    );
+  };
+}
+
+/**
+ * @description: 修改兴趣（hobby）
+ * @return {*}
+ */
+function useUpdateHobbyHook() {
+  const dispatch = useAppDispatch();
+  return <T>(stateKey: string, stateValue: T) => {
+    dispatch(
+      updateHobby({
+        [stateKey]: stateValue,
       })
     );
   };
