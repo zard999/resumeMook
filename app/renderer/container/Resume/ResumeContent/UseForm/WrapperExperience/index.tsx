@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 13:58:39
+ * @LastEditTime: 2022-08-26 14:55:23
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -32,6 +32,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     status: false, // 编辑状态
     showByCancel: false, // 编辑状态下的取消弹窗
     onAfterFn: () => {}, // 操作之后的还想执行的回调
+    tempSaveItem: {}, // 暂时保存的表单数据
   });
 
   // 1. 初次当条目列表不为空，默认选中第一条
@@ -95,9 +96,14 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
     [editModal]
   );
 
+  // 暂时修改当前form内容
   const onChangeCurrentItem = useCallback(
-    (newValue) => {
-      // 当条数据源更新，同步更新整个数组，执行updateDataList方法
+    (newItem: AdapterExperienceType) => {
+      // 为了暂时让Form表单显示的数据实时性和一致性
+      onToggleEditModal({
+        tempSaveItem: { ...newItem },
+      });
+      setCurrentItem(newItem);
     },
     [currentItem]
   );

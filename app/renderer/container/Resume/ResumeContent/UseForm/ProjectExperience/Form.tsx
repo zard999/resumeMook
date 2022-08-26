@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:32:15
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 13:57:17
+ * @LastEditTime: 2022-08-26 14:36:26
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/ProjectExperience/Form.tsx
  * @Description: Form
  *
@@ -16,10 +16,15 @@ import './index.less';
 interface IProps {
   currentItem?: AdapterExperienceType;
   isDisable?: boolean;
+  onChangeCurrentItem?: (newItem: AdapterExperienceType) => void;
 }
 
-function Form({ currentItem, isDisable }: IProps) {
+function Form({ currentItem, isDisable, onChangeCurrentItem }: IProps) {
   console.log('currentItem', isDisable);
+  const onChangeValue = (key: string, value: string) => {
+    let newItem = { ...currentItem, [key]: value };
+    onChangeCurrentItem && onChangeCurrentItem(newItem);
+  };
   return (
     <div styleName="wrapper">
       <div styleName="flex">
@@ -27,7 +32,12 @@ function Form({ currentItem, isDisable }: IProps) {
           <span styleName="require">*</span>项目名 ：
         </div>
         <div styleName="right">
-          <MyInput value={currentItem?.title} placeholder="请输入项目名" disabled={isDisable} />
+          <MyInput
+            value={currentItem?.title}
+            onChange={(e) => onChangeValue('title', e.target?.value || '')}
+            placeholder="请输入项目名"
+            disabled={isDisable}
+          />
         </div>
       </div>
       <div styleName="flex">
