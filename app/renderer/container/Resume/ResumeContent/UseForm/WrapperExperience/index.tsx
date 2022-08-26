@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 11:25:46
+ * @LastEditTime: 2022-08-26 11:37:53
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
@@ -15,6 +15,7 @@ import Menu from './Right/Menu';
 import './index.less';
 import { AdapterExperienceType } from './adapter';
 import { onAddExperience } from './utils';
+import MyModal from '@common/components/MyModal';
 interface IProps {
   dataList: any[];
   children: React.ReactNode;
@@ -29,6 +30,7 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   // 编辑状态
   const [editModal, setEditModal] = useState({
     status: false, // 编辑状态
+    showByCancel: false, // 编辑状态下的取消弹窗
   });
 
   // 1. 初次当条目列表不为空，默认选中第一条
@@ -102,10 +104,32 @@ function WrapperExperience({ children, dataList, updateDataList }: IProps) {
             isEdit={editModal?.status}
             currentItem={currentItem}
             onChangeEditStatus={() => onToggleEditModal({ status: true })}
+            onCancelEditValue={() => onToggleEditModal({ showByCancel: true })}
           />
           {newChildren}
         </Right>
       </div>
+
+      {editModal?.showByCancel && (
+        <MyModal.Confirm
+          title="确定放弃编辑的笔记内容？"
+          description="放弃后将无法回复哦～"
+          config={{
+            cancelBtn: {
+              isShow: true,
+              callback: () => {
+                onToggleEditModal({ showByCancel: false });
+              },
+            },
+            submitBtn: {
+              isShow: true,
+              callback: () => {
+                onToggleEditModal({ showByCancel: false, status: false });
+              },
+            },
+          }}
+        />
+      )}
     </div>
   );
 }
