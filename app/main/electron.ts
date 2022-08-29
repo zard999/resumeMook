@@ -2,20 +2,34 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 15:56:11
+ * @LastEditTime: 2022-08-29 16:11:35
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import path from 'path';
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 
 const ROOT_PATH = path.join(app.getAppPath(), '../');
 
 // 监听渲染进程发的消息并回复
 ipcMain.on('get-root-path', (event, arg) => {
   event.reply('reply-root-path', ROOT_PATH);
+});
+
+// 应用设置，保存自定义存储路径
+ipcMain.on('open-save-resume-path', (event, arg) => {
+  dialog
+    .showOpenDialog({
+      properties: ['openDirectory'],
+    })
+    .then((result) => {
+      event.reply('reply-save-resume-path', result.filePaths);
+    })
+    .catch((err) => {
+      event.reply('reply-save-resume-path', err);
+    });
 });
 
 function isDev() {
