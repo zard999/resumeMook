@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 15:40:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 16:59:30
+ * @LastEditTime: 2022-08-29 17:00:59
  * @FilePath: /resume/app/renderer/windowPages/setting/index.tsx
  * @Description: 应用设置
  *
@@ -43,7 +43,10 @@ function Setting() {
     ipcRenderer.on('reply-save-resume-path', (event, arg: string[]) => {
       if (arg) {
         console.log('result', arg);
-        if (arg.length > 0) setResumeSavePath(arg[0]);
+        if (arg.length > 0) {
+          setResumeSavePath(arg[0]);
+          updateGlobalConfigFile('resumeSavePath', arg[0]);
+        }
       } else {
         console.log('自定义存储路径失败');
       }
