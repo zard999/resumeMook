@@ -2,18 +2,39 @@
  * @Author: zyh
  * @Date: 2022-08-29 15:40:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 16:13:49
+ * @LastEditTime: 2022-08-29 16:59:30
  * @FilePath: /resume/app/renderer/windowPages/setting/index.tsx
  * @Description: 应用设置
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.less';
 import { ipcRenderer } from 'electron';
+import { useReadGlobalConfigFile, useUpdateGlobalConfigFile } from '@src/hooks/useGlobalConfigActionHooks';
+import { getAppPath } from '@common/utils/appPath';
 
 function Setting() {
   const [resumeSavePath, setResumeSavePath] = useState('');
+  // 进行读取文件内容和更新内容
+  const readGlobalConfigFile = useReadGlobalConfigFile();
+  const updateGlobalConfigFile = useUpdateGlobalConfigFile();
+
+  useEffect(() => {
+    readGlobalConfigFile().then((value) => {
+      // 如果存在默认路径，以此为主
+      if (value?.resumeSavePath) {
+        setResumeSavePath(value?.resumeSavePath);
+      } else {
+        // 不存在默认路径，则设置默认路径并更新文件内容
+        getAppPath().then((appPath: string) => {
+          console.log('appPath', appPath);
+          setResumeSavePath(`${appPath}resumeCache`);
+          updateGlobalConfigFile('resumeSavePath', `${appPath}resumeCache`);
+        });
+      }
+    });
+  }, []);
 
   const onChangePath = () => {
     // 1. 向主进程发生消息，因为dialog模块只能在主进程中调用
