@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 11:03:26
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 14:36:00
+ * @LastEditTime: 2022-08-29 15:26:18
  * @FilePath: /resume/app/renderer/common/components/MyTheme/slice.ts
  * @Description:
  *

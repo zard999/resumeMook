@@ -18,9 +18,11 @@ import { ROUTER_ENTRY, ROUTER_KEY } from '@common/constants/router';
 import { isHttpOrHttpsUrl } from '@common/utils/router';
 import { useAppSelector } from '@store/hooks';
 import MyTheme from '@common/components/MyTheme';
+import { selectCurrentTheme } from '@common/components/MyTheme/slice';
 
 function Root() {
   const history = useHistory();
+  const currentTheme = useAppSelector(selectCurrentTheme);
 
   // 路由跳转
   const onRouterToLink = (router: TSRouter.Item) => {
@@ -34,7 +36,7 @@ function Root() {
     }
   };
   return (
-    <div styleName="root">
+    <div styleName="root" style={{ backgroundColor: currentTheme?.backgroundColor }}>
       <div styleName="container">
         <img src={Logo} alt="" />
         <div styleName="title">resumePlatform</div>
