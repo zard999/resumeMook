@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 17:58:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 09:34:34
+ * @LastEditTime: 2022-08-29 11:40:35
  * @FilePath: /resume/app/renderer/router/index.tsx
  * @Description: 路由器
  *
@@ -16,9 +16,11 @@ import TemplateList from '@src/container/templateList';
 // 引入路由管理
 import ROUTER from '@common/constants/router';
 import useReadDirAssertsTemplateHooks from '@src/hooks/useReadDirAssertsTemplateHooks';
+import { useInitThemeConfig } from '@src/hooks/useThemeActionHooks';
 
 function Router() {
   const readDirAssertsTemplateHooks = useReadDirAssertsTemplateHooks();
+  useInitThemeConfig()();
   useEffect(() => {
     readDirAssertsTemplateHooks();
   }, []);

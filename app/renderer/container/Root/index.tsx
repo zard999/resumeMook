@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:07:04
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 11:15:58
+ * @LastEditTime: 2022-08-29 11:48:34
  * @FilePath: /resume/app/renderer/container/Root/index.tsx
  * @Description: 首页
  *
@@ -17,6 +17,7 @@ import { shell } from 'electron';
 import { ROUTER_ENTRY, ROUTER_KEY } from '@common/constants/router';
 import { isHttpOrHttpsUrl } from '@common/utils/router';
 import { useAppSelector } from '@store/hooks';
+import MyTheme from '@common/components/MyTheme';
 
 function Root() {
   const history = useHistory();
@@ -38,6 +39,9 @@ function Root() {
         <img src={Logo} alt="" />
         <div styleName="title">resumePlatform</div>
         <div styleName="tips">一个模板简历制作平台, 让你的简历更加出众 ~</div>
+        <div styleName="theme">
+          <MyTheme />
+        </div>
         <div styleName="action">
           {ROUTER_ENTRY.map((router: TSRouter.Item) => {
             return (
