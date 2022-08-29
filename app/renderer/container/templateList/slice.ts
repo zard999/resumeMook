@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 09:44:51
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 10:09:51
+ * @LastEditTime: 2022-08-29 18:05:20
  * @FilePath: /resume/app/renderer/container/templateList/slice.ts
  * @Description:
  *
@@ -36,6 +36,12 @@ const templateSlice = createSlice({
       state.templateList = action.payload.templateList;
       state.selectTemplate = action.payload.templateList[0];
     },
+
+    // 修改选中的模版
+    updateSelectTemplate(state, action) {
+      console.log('updateSelectTemplate', action.payload);
+      state.selectTemplate = action.payload;
+    },
   },
 });
 
@@ -43,6 +49,6 @@ const templateSlice = createSlice({
 export const selectTemplateList = (state: RootState) => state.template.templateList;
 export const selectSelectTemplate = (state: RootState) => state.template.selectTemplate;
 
-export const { addTemplateList } = templateSlice.actions;
+export const { addTemplateList, updateSelectTemplate } = templateSlice.actions;
 
 export default templateSlice.reducer;

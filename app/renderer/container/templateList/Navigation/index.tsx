@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-27 11:00:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 10:12:24
+ * @LastEditTime: 2022-08-29 18:04:16
  * @FilePath: /resume/app/renderer/container/templateList/Navigation/index.tsx
  * @Description: 侧边栏
  *
@@ -16,12 +16,21 @@ import UseIcon from '@assets/icon/use.png';
 
 import MyButton from '@common/components/MyButton';
 import { useAppSelector } from '@store/hooks';
-import { selectTemplateList, selectSelectTemplate } from '../slice';
+import { selectTemplateList, selectSelectTemplate, updateSelectTemplate } from '../slice';
+import { useAppDispatch } from '@store/hooks';
 
 function Navigation() {
   const templateList = useAppSelector(selectTemplateList);
   const selectTemplate = useAppSelector(selectSelectTemplate);
   console.log('templateList', templateList);
+
+  const dispatch = useAppDispatch();
+
+  // 选中模版，存入redux
+  const onSelect = (template: TSTemplate.Item) => {
+    dispatch(updateSelectTemplate(template));
+  };
+
   return (
     <div styleName="navigation">
       {templateList &&
@@ -37,7 +46,7 @@ function Navigation() {
                   size="middle"
                   className="view-btn"
                   onClick={() => {
-                    console.log(1);
+                    onSelect(template);
                   }}
                 >
                   预览模版
