@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:49:07
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 18:22:05
+ * @LastEditTime: 2022-08-29 17:47:47
  * @FilePath: /resume/app/renderer/container/Resume/ResumeHeader/index.tsx
  * @Description:
  *
@@ -17,11 +17,20 @@ import { toPrintPdf } from '@common/utils/htmlToPdf';
 import { useAppSelector } from '@store/hooks';
 import { selectResume } from '@src/container/Resume/slice';
 import MyModal from '@common/components/MyModal';
+import { useReadGlobalConfigFile, useUpdateGlobalConfigFile } from '@src/hooks/useGlobalConfigActionHooks';
+import { intToDateString } from '@common/utils/time';
+import { createUID } from '@common/utils';
+import fileAction from '@common/utils/file';
 
 function ResumeHeader() {
   const history = useHistory();
-  const { base, work, education } = useAppSelector(selectResume);
+  const resume = useAppSelector(selectResume);
+  const { base, work, education } = resume;
   const [showModal, setShowModal] = useState(false);
+  // console.log('resume', resume);
+  // 引入读取更新本地配置文件
+  const readGlobalConfigFile = useReadGlobalConfigFile();
+  const updateGlobalConfigFile = useUpdateGlobalConfigFile();
 
   // 返回首页
   const onBack = () => history.push(ROUTER.root);
@@ -29,6 +38,40 @@ function ResumeHeader() {
   // 导出PDF，格式为：姓名+学校+岗位
   const onExport = () => {
     toPrintPdf(`${base?.username}+${education?.school}+${work?.job}`);
+    setShowModal(false);
+
+    readGlobalConfigFile().then((value: { [key: string]: any }) => {
+      // console.log('resumeSavePath', value);
+      if (value?.resumeSavePath) {
+        saveResumeJson(value?.resumeSavePath);
+      } else {
+        updateGlobalConfigFile('resumeSavePath', `${value}resumeCache`);
+        saveResumeJson(`${value}resumeCache`);
+      }
+    });
+  };
+
+  // 存储数据json
+  const saveResumeJson = (resumeSavePath: string) => {
+    const date = intToDateString(new Date().valueOf(), '_');
+    const prefix = `${date}_${base?.username}_${education?.school}_${work?.job}_${createUID()}.json`;
+    console.log('resumeSavePath', resumeSavePath);
+
+    if (resumeSavePath && resumeSavePath.search('resumeCache') > -1) {
+      fileAction?.write(`${resumeSavePath}/${prefix}`, resume, 'utf8');
+    } else {
+      // 如果路径不存在 resumeCache 文件夹，则默认创建此文件夹
+      fileAction
+        ?.mkdirDir(`${resumeSavePath}/${prefix}`)
+        .then((path) => {
+          if (path) {
+            fileAction?.write(`${resumeSavePath}/${prefix}`, resume, 'utf8');
+          }
+        })
+        .catch(() => {
+          console.log('创建文件夹失败');
+        });
+    }
   };
 
   return (
@@ -50,10 +93,7 @@ function ResumeHeader() {
             },
             submitBtn: {
               isShow: true,
-              callback: () => {
-                onExport();
-                setShowModal(false);
-              },
+              callback: onExport,
             },
           }}
         />

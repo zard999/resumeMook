@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 16:20:43
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 16:48:26
+ * @LastEditTime: 2022-08-29 17:29:12
  * @FilePath: /resume/app/renderer/hooks/useGlobalConfigActionHooks.ts
  * @Description: 对存储路径的相关操作
  *
@@ -54,4 +54,3 @@ export function useUpdateGlobalConfigFile() {
     });
   };
 }
-export default { useReadGlobalConfigFile };

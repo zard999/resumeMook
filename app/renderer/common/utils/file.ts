@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 10:11:05
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 16:48:03
+ * @LastEditTime: 2022-08-29 17:23:03
  * @FilePath: /resume/app/renderer/common/utils/file.ts
  * @Description: 对文件的操作进行统一管理
  *
@@ -40,6 +40,14 @@ const fileAction = {
    */
   readDir: (path: string) => {
     return fsPromiseAPIs.readdir(path);
+  },
+  /**
+   * @description: 创建文件夹
+   * @param {string} path 创建 /a/b/c，不管'/a' 和 /a/b 是否存在
+   * @return {*}
+   */
+  mkdirDir: (path: string) => {
+    return fsPromiseAPIs.mkdir(path, { recursive: true });
   },
 };
 
