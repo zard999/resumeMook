@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 10:11:05
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 09:29:22
+ * @LastEditTime: 2022-08-29 15:02:23
  * @FilePath: /resume/app/renderer/common/utils/file.ts
  * @Description: 对文件的操作进行统一管理
  *
@@ -15,7 +15,8 @@ const fileAction = {
     return fsPromiseAPIs.readFile(path, { encoding: encoding || 'utf8' });
   },
   write: (path: string, content: string, encoding?: BufferEncoding): Promise<void> => {
-    return fsPromiseAPIs.writeFile(path, content, { encoding: encoding || 'utf8' });
+    let updateContext = typeof content === 'string' ? content : JSON.stringify(content);
+    return fsPromiseAPIs.writeFile(path, updateContext, { encoding: encoding || 'utf8' });
   },
   rename: (oldPath: string, newPath: string) => {
     return fsPromiseAPIs.rename(oldPath, newPath);

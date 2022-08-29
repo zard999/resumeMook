@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 11:03:26
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 14:01:13
+ * @LastEditTime: 2022-08-29 14:36:00
  * @FilePath: /resume/app/renderer/common/components/MyTheme/slice.ts
  * @Description:
  *
@@ -31,8 +31,9 @@ const themeSlice = createSlice({
   reducers: {
     // 初始化设置主题列表
     setThemeList(state, action) {
-      state.themeList = action.payload.themeConfigValues.themeList;
-      state.currentTheme = action.payload.themeConfigValues.currentTheme;
+      console.log('setThemeList', action.payload);
+      state.themeList = action.payload.themeList;
+      state.currentTheme = action.payload.currentTheme;
     },
 
     // 更新当前选中的列表
