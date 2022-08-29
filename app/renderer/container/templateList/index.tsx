@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-27 10:44:26
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-27 12:06:28
+ * @LastEditTime: 2022-08-29 10:35:38
  * @FilePath: /resume/app/renderer/container/templateList/index.tsx
  * @Description: 模版列表页面
  *
@@ -13,14 +13,21 @@ import './index.less';
 import Header from './Header';
 import Navigation from './Navigation';
 import StaticResume from './StaticResume';
+import MyReactSize from '@common/components/MyRectSize';
 
 function TemplateList() {
   return (
     <div styleName="container">
       <Header />
       <div styleName="content">
-        <Navigation />
-        <StaticResume />
+        <MyReactSize>
+          <MyReactSize.Left>
+            <Navigation />
+          </MyReactSize.Left>
+          <MyReactSize.Right>
+            <StaticResume />
+          </MyReactSize.Right>
+        </MyReactSize>
       </div>
     </div>
   );
