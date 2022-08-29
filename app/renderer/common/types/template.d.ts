@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 09:47:12
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 09:47:47
+ * @LastEditTime: 2022-08-29 18:20:22
  * @FilePath: /resume/app/renderer/common/types/template.d.ts
  * @Description:
  *
@@ -13,5 +13,6 @@ declare namespace TSTemplate {
     templateId: string;
     templateName: string;
     templateCover: string;
+    templateIndex: number;
   }
 }

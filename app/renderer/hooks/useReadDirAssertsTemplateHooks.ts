@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 09:15:08
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 10:01:11
+ * @LastEditTime: 2022-08-29 18:19:49
  * @FilePath: /resume/app/renderer/hooks/useReadDirAssertsTemplateHooks.ts
  * @Description:
  *
@@ -37,14 +37,18 @@ export default function () {
             console.log('该目录有以下图片', files);
             // 不能使用forEach，异步问题会导致更新不了
             // files.forEach(async (fileName: string) => {});
-            for (const fileName of files) {
-              const base64URL = await fileAction.read(`${appPath}assets/template/${fileName}`, 'base64');
+            // 为了模版侧边栏跟右边模版一一对应，暂时使用索引
+            // for (const fileName of files) {
+            for (let idx = 0; idx < files.length; idx++) {
+              const base64URL = await fileAction.read(`${appPath}assets/template/${files[idx]}`, 'base64');
               templateList.push({
-                templateName: fileName,
+                templateName: files[idx],
+                // 添加索引
+                templateIndex: idx,
                 templateId: createUID(),
                 templateCover: `data:image/png;base64,${base64URL}`,
               });
-              console.log('base64URL', base64URL);
+              // console.log('base64URL', base64URL);
             }
           }
           // 4. 存入到 redux 中，并默认选中第一条

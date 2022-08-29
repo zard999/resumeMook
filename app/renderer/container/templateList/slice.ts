@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 09:44:51
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 18:05:20
+ * @LastEditTime: 2022-08-29 18:22:38
  * @FilePath: /resume/app/renderer/container/templateList/slice.ts
  * @Description:
  *
@@ -24,6 +24,7 @@ const initialState = {
     templateId: '',
     templateName: '',
     templateCover: '',
+    templateIndex: -1,
   },
 };
 

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 15:21:05
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 14:52:09
+ * @LastEditTime: 2022-08-29 18:18:35
  * @FilePath: /resume/.eslintrc.js
  * @Description: eslint配置文件
  *
@@ -56,5 +56,6 @@ module.exports = {
     'prefer-object-has-own': 0,
 
     'max-nested-callbacks': [0, 4], // 嵌套回调最多四个
+    '@typescript-eslint/prefer-for-of': 0, // 不用强制使用for-of
   },
 };
