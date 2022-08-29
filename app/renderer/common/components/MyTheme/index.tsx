@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 10:49:10
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 11:50:07
+ * @LastEditTime: 2022-08-29 14:01:20
  * @FilePath: /resume/app/renderer/common/components/MyTheme/index.tsx
  * @Description:
  *
@@ -16,8 +16,8 @@ import './index.less';
 
 function MyTheme() {
   const themeList = useAppSelector(selectThemeList);
-  const [currentTheme] = useThemeActionHooks.useGetCurrentTheme();
-  console.log('themeList', themeList);
+  const { currentTheme, setCurrentTheme } = useThemeActionHooks.useGetCurrentTheme();
+  // console.log('currentTheme', currentTheme);
   return (
     <div styleName="box">
       {themeList.length > 0 &&
@@ -26,9 +26,9 @@ function MyTheme() {
             <span
               key={index}
               style={{ backgroundColor: t.backgroundColor }}
-              styleName={`${currentTheme.id === t.id ? 'active' : ''}`}
+              styleName={`${currentTheme?.id === t?.id ? 'active' : ''}`}
               onClick={() => {
-                // onChangeTheme && onChangeTheme(t);
+                setCurrentTheme && setCurrentTheme(t);
               }}
             />
           );

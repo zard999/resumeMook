@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 11:03:26
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 11:53:55
+ * @LastEditTime: 2022-08-29 14:01:13
  * @FilePath: /resume/app/renderer/common/components/MyTheme/slice.ts
  * @Description:
  *
@@ -34,6 +34,12 @@ const themeSlice = createSlice({
       state.themeList = action.payload.themeConfigValues.themeList;
       state.currentTheme = action.payload.themeConfigValues.currentTheme;
     },
+
+    // 更新当前选中的列表
+    updateCurrentTheme(state, action) {
+      console.log('currentTheme', action.payload);
+      state.currentTheme = action.payload;
+    },
   },
 });
 
@@ -42,6 +48,6 @@ export const selectCurrentTheme = (state: RootState) => state.theme.currentTheme
 export const selectThemeList = (state: RootState) => state.theme.themeList;
 
 // reducer
-export const { setThemeList } = themeSlice.actions;
+export const { setThemeList, updateCurrentTheme } = themeSlice.actions;
 
 export default themeSlice.reducer;

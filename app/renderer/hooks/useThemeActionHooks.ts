@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 11:08:20
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 11:53:37
+ * @LastEditTime: 2022-08-29 13:55:11
  * @FilePath: /resume/app/renderer/hooks/useThemeActionHooks.ts
  * @Description: 切换主题
  *
@@ -13,16 +13,28 @@ import { selectCurrentTheme } from '@common/components/MyTheme/slice';
 import fileAction from '@common/utils/file';
 import { getAppPath } from '@common/utils/appPath';
 import path from 'path';
-import { setThemeList } from '@common/components/MyTheme/slice';
+import { setThemeList, updateCurrentTheme } from '@common/components/MyTheme/slice';
 
 // 获取当前主题与修改主题方法
 function useGetCurrentTheme() {
+  const setCurrentTheme = useChangeCurrentTheme();
   const currentTheme = useAppSelector(selectCurrentTheme);
-  return [currentTheme];
+  return {
+    currentTheme,
+    setCurrentTheme,
+  };
+}
+
+// 更新当前选中的主题
+function useChangeCurrentTheme() {
+  const dispatch = useAppDispatch();
+  return (theme: TSTheme.Item) => {
+    dispatch(updateCurrentTheme(theme));
+  };
 }
 
 // 初始化读取主题配置文件
-export function useInitThemeConfig() {
+function useInitThemeConfig() {
   const dispatch = useAppDispatch();
   const readAppConfigThemeFile = useReadAppConfigThemeFile();
   return () => {
@@ -55,4 +67,5 @@ function useReadAppConfigThemeFile() {
 
 export default {
   useGetCurrentTheme,
+  useInitThemeConfig,
 };
