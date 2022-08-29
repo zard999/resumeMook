@@ -1,7 +1,7 @@
 node_modules
 .idea/*
 .templaterc.js
-template
+# template
 dist
 build_exe
 # mac自动生成的文件

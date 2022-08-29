@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 10:11:05
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 10:21:45
+ * @LastEditTime: 2022-08-29 09:29:22
  * @FilePath: /resume/app/renderer/common/utils/file.ts
  * @Description: 对文件的操作进行统一管理
  *
@@ -31,6 +31,14 @@ const fileAction = {
   },
   canRead: (path: string) => {
     return fsPromiseAPIs.access(path, fs.constants.R_OK);
+  },
+  /**
+   * @description: 读取目录内容
+   * @params path 路径
+   * @return {*}
+   */
+  readDir: (path: string) => {
+    return fsPromiseAPIs.readdir(path);
   },
 };
 

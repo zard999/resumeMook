@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-27 11:00:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-27 11:08:42
+ * @LastEditTime: 2022-08-29 10:12:24
  * @FilePath: /resume/app/renderer/container/templateList/Navigation/index.tsx
  * @Description: 侧边栏
  *
@@ -15,31 +15,37 @@ import TemplateCoverTwo from '@assets/template/template2.jpg';
 import UseIcon from '@assets/icon/use.png';
 
 import MyButton from '@common/components/MyButton';
+import { useAppSelector } from '@store/hooks';
+import { selectTemplateList, selectSelectTemplate } from '../slice';
 
 function Navigation() {
+  const templateList = useAppSelector(selectTemplateList);
+  const selectTemplate = useAppSelector(selectSelectTemplate);
+  console.log('templateList', templateList);
   return (
     <div styleName="navigation">
-      <div styleName="template">
-        <img styleName="cover" src={TemplateCoverOne} />
-        <div styleName="mask">
-          <img styleName="use" src={UseIcon} />
-        </div>
-      </div>
-
-      <div styleName="template">
-        <img styleName="cover" src={TemplateCoverTwo} />
-        <div styleName="mask">
-          <MyButton
-            size="middle"
-            className="view-btn"
-            onClick={() => {
-              console.log(1);
-            }}
-          >
-            预览模版
-          </MyButton>
-        </div>
-      </div>
+      {templateList &&
+        templateList.length > 0 &&
+        templateList.map((template: TSTemplate.Item) => (
+          <div styleName="template" key={template.templateId}>
+            <img styleName="cover" src={template.templateCover} />
+            <div styleName="mask">
+              {selectTemplate?.templateId === template?.templateId ? (
+                <img styleName="use" src={UseIcon} />
+              ) : (
+                <MyButton
+                  size="middle"
+                  className="view-btn"
+                  onClick={() => {
+                    console.log(1);
+                  }}
+                >
+                  预览模版
+                </MyButton>
+              )}
+            </div>
+          </div>
+        ))}
     </div>
   );
 }
