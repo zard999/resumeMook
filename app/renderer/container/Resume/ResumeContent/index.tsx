@@ -2,13 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:48:00
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 17:36:13
+ * @LastEditTime: 2022-08-30 11:38:48
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/index.tsx
  * @Description:
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import './index.less';
 import * as UseTemplateList from './UseTemplate';
 import MyScrollBox from '@src/common/components/MyScrollBox';
@@ -33,6 +34,12 @@ function ResumeContent() {
   const [isShowFormModal, setIsShowFormModal] = useState(false);
   const [formName, setFormName] = useState('');
 
+  const routerParams = useParams<{
+    fromPath: string;
+    templateId: string;
+    templateIndex: string;
+  }>();
+
   useEffect(() => {
     document.addEventListener(MESSAGE_EVENT_NAME_MAPS.OPEN_FORM_MODAL, onReceive);
     return () => document.removeEventListener(MESSAGE_EVENT_NAME_MAPS.OPEN_FORM_MODAL, onReceive);
@@ -43,7 +50,7 @@ function ResumeContent() {
     Messager.receive(e, (data: any) => {
       setIsShowFormModal(true);
       setFormName(data?.form_name);
-      console.log('data', data);
+      // console.log('data', data);
     });
   };
 
@@ -54,7 +61,7 @@ function ResumeContent() {
   };
   return (
     <MyScrollBox maxHeight={height - HEADER_ACTION_HEIGHT}>
-      <UseTemplateList.TemplateOne />
+      {routerParams?.templateId && Number(routerParams?.templateIndex) === 0 && <UseTemplateList.TemplateOne />}=
       {isShowFormModal && (
         <>
           {formName === RESUME_TOOLBAR_MAPS.personal && <BaseInfoForm onClose={onClose} />}
