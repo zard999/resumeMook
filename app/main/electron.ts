@@ -2,14 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 16:30:22
+ * @LastEditTime: 2022-08-30 16:51:28
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import path from 'path';
-import { app, BrowserWindow, ipcMain, dialog, Menu } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, Menu, globalShortcut } from 'electron';
 import customMenu from './customMenu';
 
 const ROOT_PATH = path.join(app.getAppPath(), '../');
@@ -50,24 +50,11 @@ function createWindow() {
     },
   });
 
-  // 创建应用设置窗口
-  const settingWindow = new BrowserWindow({
-    width: 720,
-    height: 240,
-    resizable: false, // 我们设置该窗口不可拉伸宽高
-    webPreferences: {
-      devTools: true,
-      nodeIntegration: true,
-    },
-  });
-
   if (isDev()) {
     // 👇 看到了吗，在开发环境下，我们加载的是运行在 7001 端口的 React
     mainWindow.loadURL(`http://127.0.0.1:7001/index.html`);
-    settingWindow.loadURL('http://localhost:7001/setting.html');
   } else {
     mainWindow.loadURL(`file://${path.join(__dirname, '../dist/index.html')}`);
-    settingWindow.loadURL(`file://${path.join(__dirname, '../dist/setting.html')}`);
   }
 }
 
@@ -78,6 +65,34 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+
+  // 注册一个快捷键
+  const customCut = globalShortcut.register('CommandOrControl+T', () => {
+    // 创建应用设置窗口
+    const settingWindow = new BrowserWindow({
+      width: 720,
+      height: 240,
+      resizable: false, // 我们设置该窗口不可拉伸宽高
+      webPreferences: {
+        devTools: true,
+        nodeIntegration: true,
+      },
+    });
+    if (isDev()) {
+      settingWindow.loadURL('http://localhost:7001/setting.html');
+    } else {
+      settingWindow.loadURL(`file://${path.join(__dirname, '../dist/setting.html')}`);
+    }
+  });
+
+  if (!customCut) {
+    console.log('凉了，注册失败');
+  }
+});
+
+app.on('will-quit', () => {
+  // 注销快捷键事件
+  globalShortcut.unregister('CommandOrControl+T');
 });
 
 app.on('ready', function () {
