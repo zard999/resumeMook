@@ -2,14 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:49:07
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 09:42:16
+ * @LastEditTime: 2022-08-30 11:28:55
  * @FilePath: /resume/app/renderer/container/Resume/ResumeHeader/index.tsx
  * @Description:
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import ROUTER from '@common/constants/router';
 import './index.less';
 import MyButton from '@common/components/MyButton/index';
@@ -23,6 +23,7 @@ import { createUID } from '@common/utils';
 import fileAction from '@common/utils/file';
 import { getAppPath } from '@common/utils/appPath';
 import { compilePath } from '@common/utils/router';
+import { ROUTER_KEY } from '../../../common/constants/router';
 
 function ResumeHeader() {
   const history = useHistory();
@@ -34,8 +35,24 @@ function ResumeHeader() {
   const readGlobalConfigFile = useReadGlobalConfigFile();
   const updateGlobalConfigFile = useUpdateGlobalConfigFile();
 
+  // 接收的路由参数
+  const routerParams = useParams<{
+    fromPath: string;
+    templateId: string;
+    templateIndex: string;
+  }>();
+
   // 返回首页
-  const onBack = () => history.push(compilePath(ROUTER.root));
+  const onBack = () => {
+    console.log('onBack', routerParams.fromPath, ROUTER_KEY.root);
+    if (routerParams.fromPath === ROUTER_KEY.root) {
+      history.push(compilePath(ROUTER.root));
+    } else if (routerParams.fromPath === ROUTER_KEY.templateList) {
+      history.push(compilePath(ROUTER.templateList));
+    } else {
+      console.log('here');
+    }
+  };
 
   // 导出PDF，格式为：姓名+学校+岗位
   const onExport = () => {
