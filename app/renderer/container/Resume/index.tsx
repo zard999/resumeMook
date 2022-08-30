@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:28:37
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 09:15:27
+ * @LastEditTime: 2022-08-30 14:05:10
  * @FilePath: /resume/app/renderer/container/Resume/index.tsx
  * @Description: 简历模块
  *
@@ -15,6 +15,7 @@ import ResumeContent from './ResumeContent';
 import ResumeToolbar from './ResumeToolbar';
 
 function Resume() {
+  console.log(11111);
   return (
     <div styleName="container">
       <div styleName="header">
