@@ -2,14 +2,15 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 16:11:35
+ * @LastEditTime: 2022-08-30 16:30:22
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import path from 'path';
-import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog, Menu } from 'electron';
+import customMenu from './customMenu';
 
 const ROOT_PATH = path.join(app.getAppPath(), '../');
 
@@ -77,4 +78,13 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
+});
+
+app.on('ready', function () {
+  /**
+   * buildFromTemplate：构建菜单栏
+   * setApplicationMenu：构建MenuItem
+   */
+  const menu = Menu.buildFromTemplate(customMenu);
+  Menu.setApplicationMenu(menu);
 });
