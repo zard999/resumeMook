@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 17:23:36
+ * @LastEditTime: 2022-08-30 17:30:05
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
@@ -66,6 +66,13 @@ function createWindow() {
   });
 
   settingWindow.uid = 'settingWindow'; // 添加自己唯一的窗口属性
+
+  // 自定义settingWindow的关闭事件
+  settingWindow.on('close', async (e) => {
+    settingWindow.hide(); // 隐藏窗口
+    e.preventDefault();
+    e.returnValue = false;
+  });
 
   if (isDev()) {
     // 👇 看到了吗，在开发环境下，我们加载的是运行在 7001 端口的 React
