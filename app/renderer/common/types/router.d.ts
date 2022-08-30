@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 23:07:06
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 23:09:05
+ * @LastEditTime: 2022-08-30 10:14:00
  * @FilePath: /resume/app/renderer/common/types/router.d.ts
  * @Description:
  *

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 23:01:32
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-27 10:51:19
+ * @LastEditTime: 2022-08-30 11:13:30
  * @FilePath: /resume/app/renderer/common/constants/router.ts
  * @Description: 路由表常量
  *
@@ -11,7 +11,8 @@
 // 模块路径
 const ROUTER = {
   root: '/',
-  resume: '/resume',
+  // 这里我们改一下简历制作的路由，规则：/来源/模版ID/模版索引
+  resume: '/resume/:fromPath/:templateId/:templateIndex',
   templateList: '/templateList',
 };
 

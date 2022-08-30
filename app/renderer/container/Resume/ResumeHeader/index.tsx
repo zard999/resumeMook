@@ -22,6 +22,7 @@ import { intToDateString } from '@common/utils/time';
 import { createUID } from '@common/utils';
 import fileAction from '@common/utils/file';
 import { getAppPath } from '@common/utils/appPath';
+import { compilePath } from '@common/utils/router';
 
 function ResumeHeader() {
   const history = useHistory();
@@ -34,7 +35,7 @@ function ResumeHeader() {
   const updateGlobalConfigFile = useUpdateGlobalConfigFile();
 
   // 返回首页
-  const onBack = () => history.push(ROUTER.root);
+  const onBack = () => history.push(compilePath(ROUTER.root));
 
   // 导出PDF，格式为：姓名+学校+岗位
   const onExport = () => {

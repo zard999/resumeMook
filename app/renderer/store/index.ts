@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 09:31:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 11:06:03
+ * @LastEditTime: 2022-08-30 11:06:38
  * @FilePath: /resume/app/renderer/store/index.ts
  * @Description:
  *
