@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 15:40:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 17:00:59
+ * @LastEditTime: 2022-08-30 09:37:30
  * @FilePath: /resume/app/renderer/windowPages/setting/index.tsx
  * @Description: 应用设置
  *
@@ -21,7 +21,7 @@ function Setting() {
   const updateGlobalConfigFile = useUpdateGlobalConfigFile();
 
   useEffect(() => {
-    readGlobalConfigFile().then((value) => {
+    readGlobalConfigFile().then((value: { [key: string]: any }) => {
       // 如果存在默认路径，以此为主
       if (value?.resumeSavePath) {
         setResumeSavePath(value?.resumeSavePath);

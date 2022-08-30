@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:49:07
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 17:47:47
+ * @LastEditTime: 2022-08-30 09:42:16
  * @FilePath: /resume/app/renderer/container/Resume/ResumeHeader/index.tsx
  * @Description:
  *
@@ -21,6 +21,7 @@ import { useReadGlobalConfigFile, useUpdateGlobalConfigFile } from '@src/hooks/u
 import { intToDateString } from '@common/utils/time';
 import { createUID } from '@common/utils';
 import fileAction from '@common/utils/file';
+import { getAppPath } from '@common/utils/appPath';
 
 function ResumeHeader() {
   const history = useHistory();
@@ -41,12 +42,15 @@ function ResumeHeader() {
     setShowModal(false);
 
     readGlobalConfigFile().then((value: { [key: string]: any }) => {
-      // console.log('resumeSavePath', value);
+      console.log('resumeSavePath', value);
       if (value?.resumeSavePath) {
         saveResumeJson(value?.resumeSavePath);
       } else {
-        updateGlobalConfigFile('resumeSavePath', `${value}resumeCache`);
-        saveResumeJson(`${value}resumeCache`);
+        // 不存在默认路径，则设置默认路径并更新文件内容
+        getAppPath().then((appPath: string) => {
+          updateGlobalConfigFile('resumeSavePath', `${appPath}resumeCache`);
+          saveResumeJson(`${appPath}resumeCache`);
+        });
       }
     });
   };
@@ -62,10 +66,10 @@ function ResumeHeader() {
     } else {
       // 如果路径不存在 resumeCache 文件夹，则默认创建此文件夹
       fileAction
-        ?.mkdirDir(`${resumeSavePath}/${prefix}`)
+        ?.mkdirDir(`${resumeSavePath}/resumeCache`)
         .then((path) => {
           if (path) {
-            fileAction?.write(`${resumeSavePath}/${prefix}`, resume, 'utf8');
+            fileAction?.write(`${resumeSavePath}/resumeCache/${prefix}`, resume, 'utf8');
           }
         })
         .catch(() => {
