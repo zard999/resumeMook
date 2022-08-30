@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 15:41:38
+ * @LastEditTime: 2022-08-30 18:03:47
  * @FilePath: /resume/app/renderer/container/templates/templateOne/components/Job/index.tsx
  * @Description: 求职意向
  *
@@ -18,7 +18,7 @@ function Job() {
       <p styleName="title">求职意向 Work</p>
       <ul styleName="content">
         <li>职位：前端工程师</li>
-        <li>城市：广州｜成都｜海口</li>
+        <li>城市：深圳｜武汉</li>
       </ul>
     </div>
   );

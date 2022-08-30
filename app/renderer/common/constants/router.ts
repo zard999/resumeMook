@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 23:01:32
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 11:13:30
+ * @LastEditTime: 2022-08-30 17:56:00
  * @FilePath: /resume/app/renderer/common/constants/router.ts
  * @Description: 路由表常量
  *
@@ -42,7 +42,7 @@ export const ROUTER_ENTRY: TSRouter.Item[] = [
     text: '模版',
   },
   {
-    url: 'https://github.com/zard999',
+    url: 'https://github.com/zard999/resumeMook',
     key: 'code',
     text: '源码',
   },

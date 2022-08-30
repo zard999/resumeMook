@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-24 15:42:22
+ * @LastEditTime: 2022-08-30 17:59:06
  * @FilePath: /resume/app/renderer/container/templates/templateOne/components/Synopsis/index.tsx
  * @Description: 简单介绍
  *
@@ -14,16 +14,9 @@ import './index.less';
 function Synopsis() {
   return (
     <div styleName="content">
-      <p styleName="name">彭道宽</p>
+      <p styleName="name">张永辉</p>
       <p styleName="job">前端工程师</p>
-      <p styleName="summary">
-        {[
-          '投身开源，rc-redux-model 库作者，SugarTurboS Club 开源组织负责人',
-          '掘金 lv3 博主，掘金文章 10w+ 阅读量，github blog 300+ star',
-          '具备良好语言表达能力和沟通能力，能快速融入团队，适应新环境。',
-          '具有代码洁癖，前后端分离，自我学习能力强，对新技术具有钻研精神',
-        ].join('，')}
-      </p>
+      <p styleName="summary">{['切图工程师', '投身开源'].join('，')}</p>
     </div>
   );
 }
