@@ -1,9 +1,9 @@
 {
     "name": "主题配置表",
     "currentTheme": {
-        "id": "purple",
+        "id": "dark",
         "fontColor": "#ffffff",
-        "backgroundColor": "#54546c"
+        "backgroundColor": "#27292c"
     },
     "themeList": [
         {

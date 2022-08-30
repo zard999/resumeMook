@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:48:00
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 11:38:48
+ * @LastEditTime: 2022-08-30 14:21:49
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/index.tsx
  * @Description:
  *
@@ -29,7 +29,10 @@ import SchoolExperienceForm from './UseForm/SchoolExperience';
 
 function ResumeContent() {
   const HEADER_ACTION_HEIGHT = 92;
-  const height = document.body.clientHeight;
+  const height = document.documentElement.clientHeight;
+
+  // console.log('body', document.body);
+  // console.log('clientHeight', document.documentElement.clientHeight);
 
   const [isShowFormModal, setIsShowFormModal] = useState(false);
   const [formName, setFormName] = useState('');
