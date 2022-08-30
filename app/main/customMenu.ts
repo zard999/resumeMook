@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-30 16:17:03
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 17:26:31
+ * @LastEditTime: 2022-08-30 17:44:55
  * @FilePath: /resume/app/main/customMenu.ts
  * @Description:
  *
@@ -125,7 +125,12 @@ const customMenu: (MenuItemConstructorOptions | MenuItem)[] = [
           const wins: MyBrowserWindow[] = BrowserWindow.getAllWindows();
           const currentWindow = lodash.find(wins, (w) => w.uid === 'settingWindow');
           if (currentWindow) {
-            currentWindow.show(); // 显示窗口
+            if (!currentWindow.isVisible()) {
+              currentWindow.show(); // 显示窗口
+            }
+            if (!currentWindow.isMinimized()) {
+              currentWindow.restore();
+            }
           }
           console.log('111');
         },

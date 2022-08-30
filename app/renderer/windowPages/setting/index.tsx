@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 15:40:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 09:37:30
+ * @LastEditTime: 2022-08-30 17:40:36
  * @FilePath: /resume/app/renderer/windowPages/setting/index.tsx
  * @Description: 应用设置
  *
@@ -52,8 +52,25 @@ function Setting() {
       }
     });
   };
+
+  const onHideWindow = () => {
+    ipcRenderer.send('Electron:SettingWindow-hide-event');
+  };
+
+  const onMinWindow = () => {
+    ipcRenderer.send('Electron:SettingWindow-min-event');
+  };
+
   return (
     <div styleName="container">
+      <div styleName="menu">
+        <div styleName="hide" onClick={onHideWindow}>
+          x
+        </div>
+        <div styleName="min" onClick={onMinWindow}>
+          -
+        </div>
+      </div>
       <p styleName="label">修改简历数据储存路径</p>
       <div styleName="input">
         <div styleName="value">{resumeSavePath || '当前存储路径为：'}</div>

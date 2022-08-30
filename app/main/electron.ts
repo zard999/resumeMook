@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 17:30:05
+ * @LastEditTime: 2022-08-30 17:53:18
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
@@ -58,6 +58,7 @@ function createWindow() {
     width: 720,
     height: 240,
     show: false, // 设置为 false，使得窗口创建时不展示
+    frame: false, // 为了解决退出程序时，程序并没有关闭的bug
     resizable: false, // 我们设置该窗口不可拉伸宽高
     webPreferences: {
       devTools: true,
@@ -67,11 +68,17 @@ function createWindow() {
 
   settingWindow.uid = 'settingWindow'; // 添加自己唯一的窗口属性
 
-  // 自定义settingWindow的关闭事件
-  settingWindow.on('close', async (e) => {
-    settingWindow.hide(); // 隐藏窗口
-    e.preventDefault();
-    e.returnValue = false;
+  // 监听关闭等事件
+  ipcMain.on('Electron:SettingWindow-hide-event', () => {
+    if (settingWindow.isVisible()) settingWindow.hide();
+  });
+
+  ipcMain.on('Electron:SettingWindow-min-event', () => {
+    if (settingWindow.isVisible()) settingWindow.minimize();
+  });
+
+  mainWindow.on('close', () => {
+    app.quit();
   });
 
   if (isDev()) {
