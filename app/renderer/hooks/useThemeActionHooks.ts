@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 11:08:20
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 10:44:12
+ * @LastEditTime: 2022-08-31 11:18:23
  * @FilePath: /resume/app/renderer/hooks/useThemeActionHooks.ts
  * @Description: 切换主题
  *
@@ -52,13 +52,17 @@ function useInitThemeConfig() {
 function useSelectTheme() {
   const dispatch = useAppDispatch();
   return (themeConfigValues: any) => {
-    const prevTheme = themeConfigValues?.currentTheme || '';
+    // 在 theme.config.json 存储的是 currentTheme 对象，而不是一个 id
+    // const prevTheme = themeConfigValues?.currentTheme || '';
+    const prevTheme: TSTheme.Item = themeConfigValues?.currentTheme;
     const initTheme = { id: 'dark', fontColor: '#fff', backgroundColor: '#27292c' };
 
     let nextTheme: TSTheme.Item;
     if (themeConfigValues?.themeList.length > 0) {
+      // 并不是通过 id 去找，而是直接使用当前主题
       if (prevTheme) {
-        nextTheme = lodash.find(themeConfigValues?.themeList, { id: prevTheme.id }) || initTheme;
+        // nextTheme = lodash.find(themeConfigValues?.themeList, { id: prevTheme.id }) || initTheme;
+        nextTheme = prevTheme || initTheme;
       } else {
         nextTheme = themeConfigValues?.themeList[0];
       }
