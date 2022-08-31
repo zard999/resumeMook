@@ -11,6 +11,7 @@
     "install:electron": "ELECTRON_MIRROR=https://cdn.npm.taobao.org/dist/electron/ npm install electron",
     "build:main": "webpack --config ./webpack/webpack.main.prod.js",
     "build:render": "webpack --config ./webpack/webpack.render.prod.js",
+    "build:dll": "webpack --config ./webpack/webpack.dll.prod.js",
     "pack": "npm run build:main && npm run build:render && electron-builder --dir",
     "dist": "npm run build:main && npm run build:render && electron-builder",
     "win": "npm run build:main && npm run build:render && electron-builder --win --ia32"
@@ -95,6 +96,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
+    "add-asset-html-webpack-plugin": "3.2.0",
     "autoprefixer": "9.0.0",
     "babel-loader": "^8.2.5",
     "babel-plugin-react-css-modules": "5.2.6",
