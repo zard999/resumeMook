@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 16:17:46
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 11:47:12
+ * @LastEditTime: 2022-08-31 11:53:27
  * @FilePath: /resume/webpack/webpack.render.prod.js
  * @Description:
  *
@@ -14,6 +14,7 @@ const baseConfig = require('./webpack.base');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const prodConfig = {
   mode: 'production',
@@ -66,13 +67,18 @@ const prodConfig = {
     }),
     // css代码压缩
     new OptimizeCssAssetsPlugin({}),
+    // 将css提取到单独的文件中
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[id].[contenthash].css',
+    }),
   ],
   module: {
     rules: [
       // 打包css的loader
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin, 'style-loader', 'css-loader', 'postcss-loader'],
       },
       // less的loader
       {
