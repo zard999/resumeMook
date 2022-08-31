@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 13:41:34
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 11:41:21
+ * @LastEditTime: 2022-08-31 11:44:27
  * @FilePath: /resume/webpack/webpack.base.js
  * @Description: webpack配置文件
  *
@@ -20,6 +20,7 @@ const path = require('path');
  */
 module.exports = {
   resolve: {
+    // 不能写太多，每次引入文件时，都要通过fs文件系统查找匹配，越多，调用底层次数越多，更耗时，webpack编译速度更慢
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       '@assets': path.join(__dirname, '../', 'assets/'),
