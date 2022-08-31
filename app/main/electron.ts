@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 10:37:02
+ * @LastEditTime: 2022-08-31 11:23:00
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
@@ -37,7 +37,7 @@ ipcMain.on('open-save-resume-path', (event, arg) => {
     });
 });
 
-function isDev() {
+export function isDev() {
   // 👉 还记得我们配置中通过 webpack.DefinePlugin 定义的构建变量吗
   return process.env.NODE_ENV === 'development';
 }
@@ -48,9 +48,10 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1200,
     height: 800,
+    resizable: isDev(),
     webPreferences: {
       nodeIntegration: true, // 注入node模块
-      devTools: true,
+      devTools: isDev(),
     },
   });
 
@@ -60,9 +61,9 @@ function createWindow() {
     height: 240,
     show: false, // 设置为 false，使得窗口创建时不展示
     frame: false, // 为了解决退出程序时，程序并没有关闭的bug
-    resizable: false, // 我们设置该窗口不可拉伸宽高
+    resizable: isDev(), // 我们设置该窗口不可拉伸宽高
     webPreferences: {
-      devTools: true,
+      devTools: isDev(),
       nodeIntegration: true,
     },
   });

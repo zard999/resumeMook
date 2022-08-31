@@ -2,16 +2,15 @@
  * @Author: zyh
  * @Date: 2022-08-30 16:17:03
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 17:44:55
+ * @LastEditTime: 2022-08-31 11:27:56
  * @FilePath: /resume/app/main/customMenu.ts
  * @Description:
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
-import { MenuItem, MenuItemConstructorOptions, app, BrowserWindow } from 'electron';
-import { shell } from 'electron';
+import { MenuItem, MenuItemConstructorOptions, app, BrowserWindow, shell } from 'electron';
 import lodash from 'lodash';
-import { MyBrowserWindow } from './electron';
+import { MyBrowserWindow, isDev } from './electron';
 
 const customMenu: (MenuItemConstructorOptions | MenuItem)[] = [
   {
@@ -87,16 +86,6 @@ const customMenu: (MenuItemConstructorOptions | MenuItem)[] = [
           if (focusedWindow) focusedWindow.setFullScreen(!focusedWindow.isFullScreen());
         },
       },
-      {
-        label: '切换开发者工具',
-        accelerator: (function () {
-          if (process.platform === 'darwin') return 'Alt+Command+I';
-          else return 'Ctrl+Shift+I';
-        })(),
-        click: function (item, focusedWindow) {
-          if (focusedWindow) focusedWindow.webContents.openDevTools();
-        },
-      },
     ],
   },
   {
@@ -138,6 +127,19 @@ const customMenu: (MenuItemConstructorOptions | MenuItem)[] = [
     ],
   },
 ];
+// 判断是否是开发环境决定是否有切换开发者工具功能
+if (isDev()) {
+  (customMenu[2]?.submenu as any).push({
+    label: '切换开发者工具',
+    accelerator: (function () {
+      if (process.platform === 'darwin') return 'Alt+Command+I';
+      else return 'Ctrl+Shift+I';
+    })(),
+    click: function (item: any, focusedWindow: MyBrowserWindow) {
+      if (focusedWindow) focusedWindow.webContents.openDevTools();
+    },
+  });
+}
 
 if (process.platform === 'darwin') {
   const { name } = app;
