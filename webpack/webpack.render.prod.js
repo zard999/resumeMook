@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 16:17:46
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 16:18:23
+ * @LastEditTime: 2022-08-30 18:47:28
  * @FilePath: /resume/webpack/webpack.render.prod.js
  * @Description:
  *
@@ -12,12 +12,15 @@ const path = require('path');
 const webpackMerge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const devConfig = {
+const prodConfig = {
   mode: 'production',
   entry: {
     // 👇 对应渲染进程的 app.jsx 入口文件
     index: path.resolve(__dirname, '../app/renderer/app.tsx'),
+    // 👇 定义应用设置的入口
+    setting: path.resolve(__dirname, '../app/renderer/windowPages/setting/app.tsx'),
   },
   output: {
     filename: '[name].[hash].js',
@@ -39,6 +42,25 @@ const devConfig = {
       template: path.resolve(__dirname, '../app/renderer/index.html'),
       filename: path.resolve(__dirname, '../dist/index.html'),
       chunks: ['index'],
+    }),
+    // 定义应用设置的HtmlWebpackPlugin
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../app/renderer/windowPages/setting/index.html'),
+      filename: path.resolve(__dirname, '../dist/setting.html'),
+      chunks: ['setting'],
+    }),
+    // 通过该插件实现资源文件的拷贝
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../assets'),
+          to: path.resolve(__dirname, '../dist/assets'),
+        },
+        {
+          from: path.resolve(__dirname, '../app/renderer/appConfig'),
+          to: path.resolve(__dirname, '../dist/appConfig'),
+        },
+      ],
     }),
   ],
   module: {
@@ -70,4 +92,4 @@ const devConfig = {
   },
 };
 
-module.exports = webpackMerge.merge(baseConfig, devConfig);
+module.exports = webpackMerge.merge(baseConfig, prodConfig);

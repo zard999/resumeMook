@@ -26,8 +26,7 @@
       "node_modules/"
     ],
     "directories": {
-      "buildResources": "assets",
-      "output": "build_exe"
+      "output": "package"
     },
     "mac": {
       "target": [
@@ -100,6 +99,7 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-react-css-modules": "5.2.6",
     "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "6",
     "css-loader": "3.0.0",
     "electron": "^11.1.1",
     "electron-builder": "^23.3.3",
