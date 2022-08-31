@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:49:07
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 15:57:39
+ * @LastEditTime: 2022-08-31 10:50:45
  * @FilePath: /resume/app/renderer/container/Resume/ResumeHeader/index.tsx
  * @Description:
  *
@@ -21,7 +21,7 @@ import { useReadGlobalConfigFile, useUpdateGlobalConfigFile } from '@src/hooks/u
 import { intToDateString } from '@common/utils/time';
 import { createUID } from '@common/utils';
 import fileAction from '@common/utils/file';
-import { getAppPath } from '@common/utils/appPath';
+import { getUserStoreDataPath } from '@common/utils/appPath';
 import { compilePath } from '@common/utils/router';
 import { ROUTER_KEY } from '@common/constants/router';
 import useClickAway from '@common/hooks/useClickAway';
@@ -66,9 +66,9 @@ function ResumeHeader() {
         saveResumeJson(value?.resumeSavePath);
       } else {
         // 不存在默认路径，则设置默认路径并更新文件内容
-        getAppPath().then((appPath: string) => {
-          updateGlobalConfigFile('resumeSavePath', `${appPath}resumeCache`);
-          saveResumeJson(`${appPath}resumeCache`);
+        getUserStoreDataPath().then((appPath: string) => {
+          updateGlobalConfigFile('resumeSavePath', `${appPath}/resumeCache`);
+          saveResumeJson(`${appPath}/resumeCache`);
         });
       }
     });
@@ -81,7 +81,21 @@ function ResumeHeader() {
     console.log('resumeSavePath', resumeSavePath);
 
     if (resumeSavePath && resumeSavePath.search('resumeCache') > -1) {
-      fileAction?.write(`${resumeSavePath}/${prefix}`, resume, 'utf8');
+      fileAction
+        .canRead(resumeSavePath)
+        .then(() => {
+          fileAction?.write(`${resumeSavePath}/${prefix}`, resume, 'utf8');
+        })
+        .catch(() => {
+          fileAction
+            .mkdirDir(resumeSavePath)
+            .then(() => {
+              fileAction.write(`${resumeSavePath}/${prefix}`, resume, 'utf8');
+            })
+            .catch(() => {
+              console.log('创建文件夹失败');
+            });
+        });
     } else {
       // 如果路径不存在 resumeCache 文件夹，则默认创建此文件夹
       fileAction

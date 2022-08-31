@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 15:40:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 17:40:36
+ * @LastEditTime: 2022-08-31 10:46:47
  * @FilePath: /resume/app/renderer/windowPages/setting/index.tsx
  * @Description: 应用设置
  *
@@ -12,7 +12,7 @@ import React, { useState, useEffect } from 'react';
 import './index.less';
 import { ipcRenderer } from 'electron';
 import { useReadGlobalConfigFile, useUpdateGlobalConfigFile } from '@src/hooks/useGlobalConfigActionHooks';
-import { getAppPath } from '@common/utils/appPath';
+import { getUserStoreDataPath } from '@common/utils/appPath';
 
 function Setting() {
   const [resumeSavePath, setResumeSavePath] = useState('');
@@ -27,7 +27,7 @@ function Setting() {
         setResumeSavePath(value?.resumeSavePath);
       } else {
         // 不存在默认路径，则设置默认路径并更新文件内容
-        getAppPath().then((appPath: string) => {
+        getUserStoreDataPath().then((appPath: string) => {
           console.log('appPath', appPath);
           setResumeSavePath(`${appPath}resumeCache`);
           updateGlobalConfigFile('resumeSavePath', `${appPath}resumeCache`);

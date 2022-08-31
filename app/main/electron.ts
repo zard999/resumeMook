@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 10:10:14
+ * @LastEditTime: 2022-08-31 10:37:02
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
@@ -11,6 +11,7 @@
 import path from 'path';
 import { app, BrowserWindow, ipcMain, dialog, Menu, globalShortcut } from 'electron';
 import customMenu from './customMenu';
+import './useData';
 export interface MyBrowserWindow extends BrowserWindow {
   uid?: string;
 }

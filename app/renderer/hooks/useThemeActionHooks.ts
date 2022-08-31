@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 11:08:20
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 09:23:51
+ * @LastEditTime: 2022-08-31 10:44:12
  * @FilePath: /resume/app/renderer/hooks/useThemeActionHooks.ts
  * @Description: 切换主题
  *
@@ -11,7 +11,7 @@
 import { useAppDispatch, useAppSelector } from '@src/store/hooks';
 import { selectCurrentTheme } from '@common/components/MyTheme/slice';
 import fileAction from '@common/utils/file';
-import { getAppPath } from '@common/utils/appPath';
+import { getUserStoreDataPath } from '@common/utils/appPath';
 import path from 'path';
 import lodash from 'lodash';
 import { setThemeList, updateCurrentTheme } from '@common/components/MyTheme/slice';
@@ -80,7 +80,7 @@ function useReadAppConfigThemeFile() {
   return () => {
     return new Promise((resolve, reject) => {
       // 获取应用地址
-      getAppPath()
+      getUserStoreDataPath()
         .then((appPath: string) => {
           const jsonPath = path.join(appPath, 'appConfig/theme.config.json');
           fileAction.hasFile(jsonPath).then(async () => {
@@ -101,7 +101,7 @@ function useUpdateAppConfigThemeFile() {
   const readAppConfigThemeFile = useReadAppConfigThemeFile();
   return (updateKey: string, updateValues: any, callback?: () => void) => {
     // 获取应用地址
-    getAppPath().then((appPath: string) => {
+    getUserStoreDataPath().then((appPath: string) => {
       const jsonPath = path.join(appPath, 'appConfig/theme.config.json');
       console.log('nextConfigContent', jsonPath);
       readAppConfigThemeFile().then((themeConfigValues: any) => {

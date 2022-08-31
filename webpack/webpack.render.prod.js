@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 16:17:46
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 09:24:58
+ * @LastEditTime: 2022-08-31 10:52:43
  * @FilePath: /resume/webpack/webpack.render.prod.js
  * @Description:
  *
@@ -56,10 +56,11 @@ const prodConfig = {
           from: path.resolve(__dirname, '../assets'),
           to: path.resolve(__dirname, '../dist/assets'),
         },
-        {
-          from: path.resolve(__dirname, '../appConfig'),
-          to: path.resolve(__dirname, '../dist/appConfig'),
-        },
+        // 取消拷贝，因为文件夹现在是代码创建的
+        // {
+        //   from: path.resolve(__dirname, '../appConfig'),
+        //   to: path.resolve(__dirname, '../dist/appConfig'),
+        // },
       ],
     }),
   ],
