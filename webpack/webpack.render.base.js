@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-31 15:01:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 15:21:48
+ * @LastEditTime: 2022-08-31 15:28:31
  * @FilePath: /resume/webpack/webpack.render.base.js
  * @Description: webpack的render基础配置文件
  *
@@ -12,6 +12,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlWebpackPlugin = require('add-asset-html-webpack-plugin');
+const webpack = require('webpack');
 
 // const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // 每次打包自动清除上一次的dist文件
 /**
@@ -134,6 +135,11 @@ module.exports = {
     }),
     new AddAssetHtmlWebpackPlugin({
       filepath: path.resolve(__dirname, '../dist/dll/reacts.dll.js'),
+    }),
+    // 当使用第三方包时，会现在reacts.manifest.json找第三方模块的映射关系，如果存在，则直接
+    // 拿全局变量 webpack.DllPlugin，如果没有，则会从 node_modules中拿过来打包
+    new webpack.DllReferencePlugin({
+      manifest: path.resolve(__dirname, '../dist/dll/reacts.manifest.json'),
     }),
   ],
 };
