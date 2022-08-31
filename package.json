@@ -16,7 +16,7 @@
     "win": "npm run build:main && npm run build:render && electron-builder --win --ia32"
   },
   "build": {
-    "appId": "com.resume.,ook",
+    "appId": "com.resume.platform",
     "productName": "简历平台",
     "copyright": "Copyright © 2022 ${author}",
     "extends": null,

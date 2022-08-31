@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 09:18:13
+ * @LastEditTime: 2022-08-31 10:10:14
  * @FilePath: /resume/app/main/electron.ts
  * @Description: electron启动文件
  *
@@ -19,7 +19,7 @@ const ROOT_PATH = path.join(app.getAppPath(), '../');
 
 // 监听渲染进程发的消息并回复
 ipcMain.on('get-root-path', (event, arg) => {
-  event.reply('reply-root-path', __dirname);
+  event.reply('reply-root-path', isDev() ? ROOT_PATH : __dirname);
 });
 
 // 应用设置，保存自定义存储路径
