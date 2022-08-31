@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-25 09:58:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 15:36:55
+ * @LastEditTime: 2022-08-31 16:30:39
  * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/Education/index.tsx
  * @Description: 教育信息
  *
@@ -65,7 +65,7 @@ function Eduction({ onClose }: IProps) {
             <MyInput
               onChange={(e) => updateResumeHook('education/degree', e.target?.value || '')}
               value={education?.degree || ''}
-              placeholder="学士？硕士？博士？"
+              placeholder="请输入"
               allowClear={true}
             />
           </div>

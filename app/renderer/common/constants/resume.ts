@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-24 16:28:41
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 16:48:07
+ * @LastEditTime: 2022-08-31 16:32:50
  * @FilePath: /resume/app/renderer/common/constants/resume.ts
  * @Description: 简历常量
  *
@@ -19,7 +19,7 @@ export const RESUME_TOOLBAR_MAPS = {
   certificate: 'certificate', // 获奖证书
   evaluation: 'evaluation', // 个人评价
   skill: 'skill', // 技能清单
-  test: 'test', // 测试用例
+  // test: 'test', // 测试用例
 };
 
 const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
@@ -75,7 +75,7 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
     key: RESUME_TOOLBAR_MAPS.evaluation,
     name: '个人评价',
     summary: '低调夸一夸自己有什么亮点',
-    require: false,
+    require: true,
   },
   {
     key: RESUME_TOOLBAR_MAPS.skill,
@@ -83,12 +83,12 @@ const RESUME_TOOLBAR_LIST: TSResume.SliderItem[] = [
     summary: '展示具备的技能，突出你的能力',
     require: false,
   },
-  {
-    key: RESUME_TOOLBAR_MAPS.test,
-    name: '测试用例',
-    summary: '测试用例，一键覆盖',
-    require: true,
-  },
+  // {
+  //   key: RESUME_TOOLBAR_MAPS.test,
+  //   name: '测试用例',
+  //   summary: '测试用例，一键覆盖',
+  //   require: true,
+  // },
 ];
 
 export default RESUME_TOOLBAR_LIST;
