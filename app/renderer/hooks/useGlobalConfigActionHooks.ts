@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 16:20:43
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 17:29:12
+ * @LastEditTime: 2022-08-31 09:23:31
  * @FilePath: /resume/app/renderer/hooks/useGlobalConfigActionHooks.ts
  * @Description: 对存储路径的相关操作
  *
@@ -19,7 +19,7 @@ export function useReadGlobalConfigFile() {
       getAppPath()
         .then((appPath: string) => {
           // 获取配置文件路径
-          const jsonPath = path.join(appPath, 'app/renderer/appConfig/global.config.json');
+          const jsonPath = path.join(appPath, 'appConfig/global.config.json');
           fileAction.hasFile(jsonPath).then(async () => {
             const result = await fileAction.read(jsonPath, 'utf-8');
             resolve(JSON.parse(result));
@@ -37,7 +37,7 @@ export function useUpdateGlobalConfigFile() {
   const readGlobalConfigFile = useReadGlobalConfigFile();
   return (updateKey: string, updateValues: any, callback?: () => void) => {
     getAppPath().then((appPath: string) => {
-      const jsonPath = path.join(appPath, 'app/renderer/appConfig/global.config.json');
+      const jsonPath = path.join(appPath, 'appConfig/global.config.json');
       readGlobalConfigFile().then((values) => {
         if (values && !!Object.keys(values).length) {
           const nextConfigContent = {

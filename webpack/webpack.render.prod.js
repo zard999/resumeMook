@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 16:17:46
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 18:47:28
+ * @LastEditTime: 2022-08-31 09:24:58
  * @FilePath: /resume/webpack/webpack.render.prod.js
  * @Description:
  *
@@ -57,7 +57,7 @@ const prodConfig = {
           to: path.resolve(__dirname, '../dist/assets'),
         },
         {
-          from: path.resolve(__dirname, '../app/renderer/appConfig'),
+          from: path.resolve(__dirname, '../appConfig'),
           to: path.resolve(__dirname, '../dist/appConfig'),
         },
       ],

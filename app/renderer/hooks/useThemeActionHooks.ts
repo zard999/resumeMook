@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 11:08:20
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 15:22:27
+ * @LastEditTime: 2022-08-31 09:23:51
  * @FilePath: /resume/app/renderer/hooks/useThemeActionHooks.ts
  * @Description: 切换主题
  *
@@ -82,7 +82,7 @@ function useReadAppConfigThemeFile() {
       // 获取应用地址
       getAppPath()
         .then((appPath: string) => {
-          const jsonPath = path.join(appPath, 'app/renderer/appConfig/theme.config.json');
+          const jsonPath = path.join(appPath, 'appConfig/theme.config.json');
           fileAction.hasFile(jsonPath).then(async () => {
             const themeConfigValues = await fileAction.read(jsonPath, 'utf-8');
             // console.log('themeConfigValues', themeConfigValues);
@@ -102,7 +102,7 @@ function useUpdateAppConfigThemeFile() {
   return (updateKey: string, updateValues: any, callback?: () => void) => {
     // 获取应用地址
     getAppPath().then((appPath: string) => {
-      const jsonPath = path.join(appPath, 'app/renderer/appConfig/theme.config.json');
+      const jsonPath = path.join(appPath, 'appConfig/theme.config.json');
       console.log('nextConfigContent', jsonPath);
       readAppConfigThemeFile().then((themeConfigValues: any) => {
         console.log('nextConfigContent', themeConfigValues);
