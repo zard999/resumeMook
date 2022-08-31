@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-31 15:01:56
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 15:28:31
+ * @LastEditTime: 2022-08-31 16:26:41
  * @FilePath: /resume/webpack/webpack.render.base.js
  * @Description: webpack的render基础配置文件
  *
@@ -78,7 +78,7 @@ module.exports = {
               limit: 2048,
               name: '[name]_[hash].[ext]',
               outputPath: 'images/',
-              // esModule: false,
+              esModule: false, // 解决配置图片出现url([object Module])问题
             },
           },
         ],

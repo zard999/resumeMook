@@ -7,7 +7,7 @@
   "scripts": {
     "start:dev": "npm run start:render && npm run start:main",
     "start:main": "webpack --config ./webpack/webpack.main.dev.js && electron ./dist/electron.js",
-    "start:render": "webpack-dev-server --config ./webpack/webpack.render.dev.js",
+    "start:render": "npm run build:dll && webpack-dev-server --config ./webpack/webpack.render.dev.js",
     "install:electron": "ELECTRON_MIRROR=https://cdn.npm.taobao.org/dist/electron/ npm install electron",
     "build:main": "webpack --config ./webpack/webpack.main.prod.js",
     "build:render": "webpack --config ./webpack/webpack.render.prod.js",
@@ -70,7 +70,6 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@reduxjs/toolkit": "^1.8.5",
-    "classnames": "^2.3.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "react": "17.0.2",
@@ -130,6 +129,7 @@
     "webpack": "4.44.1",
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "3.11.2",
-    "webpack-merge": "^5.8.0"
+    "webpack-merge": "^5.8.0",
+    "classnames": "^2.3.1"
   }
 }

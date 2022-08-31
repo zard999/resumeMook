@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 15:40:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 10:46:47
+ * @LastEditTime: 2022-08-31 16:16:18
  * @FilePath: /resume/app/renderer/windowPages/setting/index.tsx
  * @Description: 应用设置
  *
@@ -29,8 +29,8 @@ function Setting() {
         // 不存在默认路径，则设置默认路径并更新文件内容
         getUserStoreDataPath().then((appPath: string) => {
           console.log('appPath', appPath);
-          setResumeSavePath(`${appPath}resumeCache`);
-          updateGlobalConfigFile('resumeSavePath', `${appPath}resumeCache`);
+          setResumeSavePath(`${appPath}/resumeCache`);
+          updateGlobalConfigFile('resumeSavePath', `${appPath}/resumeCache`);
         });
       }
     });
@@ -71,11 +71,13 @@ function Setting() {
           -
         </div>
       </div>
-      <p styleName="label">修改简历数据储存路径</p>
-      <div styleName="input">
-        <div styleName="value">{resumeSavePath || '当前存储路径为：'}</div>
-        <div styleName="update-btn" onClick={onChangePath}>
-          更改路径
+      <div styleName="content">
+        <p styleName="label">修改简历数据储存路径</p>
+        <div styleName="input">
+          <div styleName="value">{resumeSavePath || '当前存储路径为：'}</div>
+          <div styleName="update-btn" onClick={onChangePath}>
+            更改路径
+          </div>
         </div>
       </div>
     </div>
