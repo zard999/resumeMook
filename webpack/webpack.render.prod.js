@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 16:17:46
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 11:53:27
+ * @LastEditTime: 2022-08-31 14:31:09
  * @FilePath: /resume/webpack/webpack.render.prod.js
  * @Description:
  *
@@ -15,9 +15,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const prodConfig = {
   mode: 'production',
+  optimization: {
+    minimizer: [
+      // JS代码压缩
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: false,
+      }),
+    ],
+  },
   entry: {
     // 👇 对应渲染进程的 app.jsx 入口文件
     index: path.resolve(__dirname, '../app/renderer/app.tsx'),
