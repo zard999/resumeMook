@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 09:15:08
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-29 18:19:49
+ * @LastEditTime: 2022-08-31 09:31:29
  * @FilePath: /resume/app/renderer/hooks/useReadDirAssertsTemplateHooks.ts
  * @Description:
  *
@@ -29,7 +29,7 @@ export default function () {
       console.log('appPath', appPath);
       // 2. 从assets读取模版图片信息，构造模版列表
       fileAction
-        .readDir(`${appPath}assets/template`)
+        .readDir(`${appPath}/assets/template`)
         .then(async (files: string[]) => {
           const templateList: TSTemplate.Item[] = [];
           // 3. 构造模版函数
@@ -40,7 +40,7 @@ export default function () {
             // 为了模版侧边栏跟右边模版一一对应，暂时使用索引
             // for (const fileName of files) {
             for (let idx = 0; idx < files.length; idx++) {
-              const base64URL = await fileAction.read(`${appPath}assets/template/${files[idx]}`, 'base64');
+              const base64URL = await fileAction.read(`${appPath}/assets/template/${files[idx]}`, 'base64');
               templateList.push({
                 templateName: files[idx],
                 // 添加索引
