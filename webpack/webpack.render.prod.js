@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 16:17:46
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 10:52:43
+ * @LastEditTime: 2022-08-31 11:47:12
  * @FilePath: /resume/webpack/webpack.render.prod.js
  * @Description:
  *
@@ -13,6 +13,7 @@ const webpackMerge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const prodConfig = {
   mode: 'production',
@@ -63,6 +64,8 @@ const prodConfig = {
         // },
       ],
     }),
+    // css代码压缩
+    new OptimizeCssAssetsPlugin({}),
   ],
   module: {
     rules: [
