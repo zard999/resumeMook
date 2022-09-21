@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-08-25 17:19:09
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-26 16:40:24
- * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
+ * @LastEditTime: 2022-09-21 17:57:10
+ * @FilePath: /resumeMook/app/renderer/container/Resume/ResumeContent/UseForm/WrapperExperience/index.tsx
  * @Description: 封装复杂Form
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
@@ -24,8 +24,8 @@ interface IProps {
 
 function WrapperExperience({ children, dataList, updateDataList }: IProps) {
   const [currentIndex, setCurrentIndex] = useState(-1);
-  const [currentItem, setCurrentItem] = useState<AdapterExperienceType>({});
-  const [experienceList, setExperienceList] = useState<AdapterExperienceType[]>([]);
+  const [currentItem, setCurrentItem] = useState<Partial<AdapterExperienceType>>({});
+  const [experienceList, setExperienceList] = useState<Partial<AdapterExperienceType>[]>([]);
 
   const [editModal, setEditModal] = useState({
     status: false, // 编辑状态
