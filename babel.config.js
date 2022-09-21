@@ -2,12 +2,13 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:59:24
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-23 15:39:11
- * @FilePath: /resume/babel.config.js
+ * @LastEditTime: 2022-09-21 17:15:32
+ * @FilePath: /resumeMook/babel.config.js
  * @Description: babel配置文件
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
+
 module.exports = {
   presets: [
     '@babel/preset-env', // 👉 根据配置的目标浏览器或者运行环境，选择对应的语法包，从而将代码进行转换

@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 15:08:35
- * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/index.tsx
+ * @LastEditTime: 2022-09-15 09:07:11
+ * @FilePath: /resumeMook/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/index.tsx
  * @Description: 模板1
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
@@ -20,7 +20,7 @@ import Skill from './components/Skill';
 import Post from './components/Post';
 import Project from './components/Project';
 import Work from './components/Work';
-import Education from './components/Education';
+import Education from './components/Job/Education';
 import { useAppSelector } from '@store/hooks';
 import { selectResumeToolbarKeys } from '@src/container/Resume/slice';
 import { RESUME_TOOLBAR_MAPS } from '@common/constants/resume';

@@ -11,7 +11,7 @@
 import React from 'react';
 import '../../../styles/template-one.less';
 import { useSelector } from 'react-redux';
-import { selectResume } from '../../../../../slice';
+import { selectResume } from '../../../../../../slice';
 
 function Education() {
   const { education } = useSelector(selectResume);
