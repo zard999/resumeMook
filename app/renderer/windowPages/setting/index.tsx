@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-08-29 15:40:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-31 16:16:18
- * @FilePath: /resume/app/renderer/windowPages/setting/index.tsx
+ * @LastEditTime: 2022-09-22 11:22:18
+ * @FilePath: /resumeMook/app/renderer/windowPages/setting/index.tsx
  * @Description: 应用设置
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
@@ -53,6 +53,13 @@ function Setting() {
     });
   };
 
+  // 全量更新
+  const onUpdate = () => {
+    // 6. 点击确认更新
+    ipcRenderer.send('comfirmUpdate');
+    console.log('comfirmUpdate');
+  };
+
   const onHideWindow = () => {
     ipcRenderer.send('Electron:SettingWindow-hide-event');
   };
@@ -79,6 +86,9 @@ function Setting() {
             更改路径
           </div>
         </div>
+      </div>
+      <div styleName="update-btn" onClick={onUpdate}>
+        更新
       </div>
     </div>
   );

@@ -2,14 +2,14 @@
  * @Author: zyh
  * @Date: 2022-08-24 15:38:23
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-25 15:04:17
- * @FilePath: /resume/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/components/Education/index.tsx
+ * @LastEditTime: 2022-09-22 10:14:42
+ * @FilePath: /resumeMook/app/renderer/container/Resume/ResumeContent/UseTemplate/templateOne/components/Job/Education/index.tsx
  * @Description: 基本信息
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
  */
 import React from 'react';
-import '../../../styles/template-one.less';
+import '../../../../styles/template-one.less';
 import { useSelector } from 'react-redux';
 import { selectResume } from '../../../../../../slice';
 
