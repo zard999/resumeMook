@@ -1,6 +1,6 @@
 {
   "name": "resume",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "zyh",
   "description": "resume",
   "main": "./dist/electron.js",
@@ -12,13 +12,13 @@
     "build:main": "webpack --config ./webpack/webpack.main.prod.js",
     "build:render": "webpack --config ./webpack/webpack.render.prod.js",
     "build:dll": "webpack --config ./webpack/webpack.dll.prod.js",
-    "pack": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --dir",
-    "dist": "npm run build:main && npm run build:render && electron-builder",
+    "dist": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --dir",
+    "pack": "npm run build:dll && npm run build:main && npm run build:render && electron-builder",
     "win": "npm run build:main && npm run build:render && electron-builder --win --ia32"
   },
   "build": {
     "appId": "com.resume.platform",
-    "productName": "简历平台",
+    "productName": "resume",
     "copyright": "Copyright © 2022 ${author}",
     "extends": null,
     "files": [
@@ -67,7 +67,7 @@
     "publish": [
       {
         "provider": "generic",
-        "url": "https://plasma.stpass.com/file/electron-base/resume"
+        "url": "https://plasma.stpass.com/file/electron-base/resume-realease"
       }
     ]
   },

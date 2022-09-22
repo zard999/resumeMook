@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-09-22 11:19:30
+ * @LastEditTime: 2022-09-22 15:08:41
  * @FilePath: /resumeMook/app/main/electron.ts
  * @Description: electron启动文件
  *
@@ -92,87 +92,52 @@ function createWindow() {
     mainWindow.loadURL(`file://${path.join(__dirname, '../dist/index.html')}`);
     settingWindow.loadURL(`file://${path.join(__dirname, '../dist/setting.html')}`);
   }
+}
 
-  // 全量更新
-  // 配置提供更新的程序及build中配置的url
-  autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/resume');
-  // 是否自动更新，如果为true，当可以更新时(update-available)自动执行更新下载
-  autoUpdater.autoDownload = false;
-
-  // 1.在渲染进程里触发获取更新，开始进行更新流程。 (根据具体需求)
-  ipcMain.on('checkForUpdates', (e, arg) => {
-    autoUpdater.checkForUpdates();
-  });
-  autoUpdater.on('error', function (error) {
-    printUpdaterMessage('error');
-    mainWindow.webContents.send('updateError', error);
-  });
-
-  // 2. 开始检查是否有更新
-  autoUpdater.on('checking-for-update', function () {
-    printUpdaterMessage('checking');
-  });
-
-  // 3. 有更新时触发
-  autoUpdater.on('update-available', function (info) {
-    printUpdaterMessage('updateAvailable');
-    // 4. 告诉渲染进程有更新，info包含新版本信息
-    mainWindow.webContents.send('updateAvailable', info);
-    // dialog
-    //   .showMessageBox({
-    //     type: 'info',
-    //     title: '检测到新版本',
-    //     message: '是否立即更新?',
-    //     buttons: ['暂时忽略', '立即更新'],
-    //   })
-    //   .then((response) => {
-    //     if (response.response === 1) {
-    //       autoUpdater.downloadUpdate();
-    //     } else {
-    //       // 4. 告诉渲染进程有更新，info包含新版本信息
-    //       mainWindow.webContents.send('updateAvailable', info);
-    //     }
-    //   });
-  });
-
-  // 7. 收到确认更新提示，执行下载
-  ipcMain.on('comfirmUpdate', () => {
-    autoUpdater.downloadUpdate();
-  });
-
-  autoUpdater.on('update-not-available', function (info) {
-    printUpdaterMessage('updateNotAvailable');
-  });
-
-  // 8. 下载进度，包含进度百分比、下载速度、已下载字节、总字节等
-  // ps: 调试时，想重复更新，会因为缓存导致该事件不执行，下载直接完成，可找到C:\Users\40551\AppData\Local\xxx-updater\pending下的缓存文件将其删除（这是我本地的路径）
-  autoUpdater.on('download-progress', function (progressObj) {
-    printUpdaterMessage('downloadProgress');
-    mainWindow.webContents.send('downloadProgress', progressObj);
-  });
-
-  // 10. 下载完成，告诉渲染进程，是否立即执行更新安装操作
-  autoUpdater.on('update-downloaded', function () {
-    mainWindow.webContents.send('updateDownloaded');
-    // 12. 立即更新安装
-    ipcMain.on('updateNow', (e, arg) => {
-      autoUpdater.quitAndInstall();
-    });
-  });
-
-  // 将日志在渲染进程里面打印出来
-  function printUpdaterMessage(
-    arg: 'error' | 'checking' | 'updateAvailable' | 'downloadProgress' | 'updateNotAvailable'
-  ) {
-    let message = {
-      error: '更新出错',
-      checking: '正在检查更新',
-      updateAvailable: '检测到新版本',
-      downloadProgress: '下载中',
-      updateNotAvailable: '无新版本',
-    };
-    mainWindow.webContents.send('printUpdaterMessage', message[arg] ?? arg);
+// 全量更新
+function checkUpdate() {
+  if (process.platform === 'darwin') {
+    // 我们使用koa-static将静态目录设置成了static文件夹，
+    // 所以访问http://127.0.0.1:9005/darwin，就相当于访问了static/darwin文件夹，win32同理
+    // autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/'); // 设置要检测更新的路径
+    autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/resume-realease'); // 设置要检测更新的路径
+  } else {
+    autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/resume-realease');
+    // autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/');
   }
+
+  // 检测更新
+  autoUpdater.checkForUpdates();
+
+  // 监听'error'事件
+  autoUpdater.on('error', (err) => {
+    console.log(err);
+  });
+
+  // 监听'update-available'事件，发现有新版本时触发
+  autoUpdater.on('update-available', () => {
+    console.log('found new version');
+  });
+
+  // 默认会自动下载新版本，如果不想自动下载，设置autoUpdater.autoDownload = false
+
+  // 监听'update-downloaded'事件，新版本下载完成时触发
+  autoUpdater.on('update-downloaded', () => {
+    dialog
+      .showMessageBox({
+        type: 'info',
+        title: '应用更新',
+        message: '发现新版本，是否更新？',
+        buttons: ['是', '否'],
+      })
+      .then((buttonIndex) => {
+        if (buttonIndex.response === 0) {
+          // 选择是，则退出程序，安装新版本
+          autoUpdater.quitAndInstall();
+          app.quit();
+        }
+      });
+  });
 }
 
 app.whenReady().then(() => {
@@ -203,4 +168,7 @@ app.on('ready', function () {
    */
   const menu = Menu.buildFromTemplate(customMenu);
   Menu.setApplicationMenu(menu);
+
+  // 每次启动程序，就检查更新
+  checkUpdate();
 });
