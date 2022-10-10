@@ -12,14 +12,16 @@
     "build:main": "webpack --config ./webpack/webpack.main.prod.js",
     "build:render": "webpack --config ./webpack/webpack.render.prod.js",
     "build:dll": "webpack --config ./webpack/webpack.dll.prod.js",
-    "dist": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --dir",
-    "pack": "npm run build:dll && npm run build:main && npm run build:render && electron-builder",
-    "win": "npm run build:main && npm run build:render && electron-builder --win --ia32"
+    "distOS": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --mac",
+    "distWin64": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --win --x64",
+    "distWin32": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --win --ia32",
+    "postinstall": "electron-builder install-app-deps"
   },
   "build": {
     "appId": "com.resume.platform",
     "productName": "resume",
     "copyright": "Copyright © 2022 ${author}",
+    "asar": true,
     "extends": null,
     "files": [
       "dist/**/*",
@@ -67,7 +69,7 @@
     "publish": [
       {
         "provider": "generic",
-        "url": "https://plasma.stpass.com/file/electron-base/resume-realease"
+        "url": "http://127.0.0.1:9005/"
       }
     ]
   },
@@ -76,6 +78,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@reduxjs/toolkit": "^1.8.5",
+    "adm-zip": "^0.5.9",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "react": "17.0.2",
@@ -83,7 +86,8 @@
     "react-redux": "^8.0.2",
     "react-router": "5.2.0",
     "react-router-dom": "5.2.0",
-    "redux": "^4.2.0"
+    "redux": "^4.2.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@babel/cli": "7.14.3",

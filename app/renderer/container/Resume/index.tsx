@@ -2,8 +2,8 @@
  * @Author: zyh
  * @Date: 2022-08-23 18:28:37
  * @LastEditors: zyh
- * @LastEditTime: 2022-08-30 14:05:10
- * @FilePath: /resume/app/renderer/container/Resume/index.tsx
+ * @LastEditTime: 2022-09-22 17:55:06
+ * @FilePath: /resumeMook/app/renderer/container/Resume/index.tsx
  * @Description: 简历模块
  *
  * Copyright (c) 2022 by 穿越, All Rights Reserved.
@@ -15,7 +15,6 @@ import ResumeContent from './ResumeContent';
 import ResumeToolbar from './ResumeToolbar';
 
 function Resume() {
-  console.log(11111);
   return (
     <div styleName="container">
       <div styleName="header">

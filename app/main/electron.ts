@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-23 11:18:25
  * @LastEditors: zyh
- * @LastEditTime: 2022-09-22 15:08:41
+ * @LastEditTime: 2022-09-22 18:22:33
  * @FilePath: /resumeMook/app/main/electron.ts
  * @Description: electron启动文件
  *
@@ -11,6 +11,7 @@
 import path from 'path';
 import { autoUpdater } from 'electron-updater';
 import { app, BrowserWindow, ipcMain, dialog, Menu, globalShortcut } from 'electron';
+import { CheckForUpdates } from './update';
 import customMenu from './customMenu';
 import './useData';
 export interface MyBrowserWindow extends BrowserWindow {
@@ -18,6 +19,14 @@ export interface MyBrowserWindow extends BrowserWindow {
 }
 
 const ROOT_PATH = path.join(app.getAppPath(), '../');
+
+// 定义返回给渲染层的相关提示文案
+const message = {
+  error: '检查更新出错',
+  checking: '正在检查更新……',
+  updateAva: '检测到新版本，正在下载……',
+  updateNotAva: '现在使用的就是最新版本，不用更新',
+};
 
 // 监听渲染进程发的消息并回复
 ipcMain.on('get-root-path', (event, arg) => {
@@ -92,29 +101,37 @@ function createWindow() {
     mainWindow.loadURL(`file://${path.join(__dirname, '../dist/index.html')}`);
     settingWindow.loadURL(`file://${path.join(__dirname, '../dist/setting.html')}`);
   }
+
+  CheckForUpdates();
 }
 
 // 全量更新
 function checkUpdate() {
-  if (process.platform === 'darwin') {
-    // 我们使用koa-static将静态目录设置成了static文件夹，
-    // 所以访问http://127.0.0.1:9005/darwin，就相当于访问了static/darwin文件夹，win32同理
-    // autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/'); // 设置要检测更新的路径
-    autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/resume-realease'); // 设置要检测更新的路径
+  // if (process.platform === 'darwin') {
+  // 我们使用koa-static将静态目录设置成了static文件夹，
+  // 所以访问http://127.0.0.1:9005/darwin，就相当于访问了static/darwin文件夹，win32同理
+  // autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/'); // 设置要检测更新的路径
+  // 这里是为了在本地做应用升级测试使用
+  if (isDev()) {
+    autoUpdater.updateConfigPath = path.join(__dirname, 'dev-app-update.yml');
   } else {
-    autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/resume-realease');
-    // autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/');
+    autoUpdater.setFeedURL('http://127.0.0.1:9005/darwin/'); // 设置要检测更新的路径
   }
+
+  // } else {
+  //   autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/resume-realease');
+  //   // autoUpdater.setFeedURL('https://plasma.stpass.com/file/electron-base/');
+  // }
 
   // 检测更新
   autoUpdater.checkForUpdates();
 
   // 监听'error'事件
   autoUpdater.on('error', (err) => {
-    console.log(err);
+    console.log('err', err);
   });
 
-  // 监听'update-available'事件，发现有新版本时触发
+  // 监听'update-available'事件，发现有新版本可以更新时触发
   autoUpdater.on('update-available', () => {
     console.log('found new version');
   });
@@ -126,8 +143,8 @@ function checkUpdate() {
     dialog
       .showMessageBox({
         type: 'info',
-        title: '应用更新',
-        message: '发现新版本，是否更新？',
+        title: '应用安装',
+        message: '发现新版本，是否安装？',
         buttons: ['是', '否'],
       })
       .then((buttonIndex) => {
@@ -170,5 +187,5 @@ app.on('ready', function () {
   Menu.setApplicationMenu(menu);
 
   // 每次启动程序，就检查更新
-  checkUpdate();
+  // checkUpdate();
 });

@@ -2,7 +2,7 @@
  * @Author: zyh
  * @Date: 2022-08-29 15:40:31
  * @LastEditors: zyh
- * @LastEditTime: 2022-09-22 11:22:18
+ * @LastEditTime: 2022-09-22 17:50:14
  * @FilePath: /resumeMook/app/renderer/windowPages/setting/index.tsx
  * @Description: 应用设置
  *
@@ -54,10 +54,21 @@ function Setting() {
   };
 
   // 全量更新
+  // 增量更新
   const onUpdate = () => {
     // 6. 点击确认更新
-    ipcRenderer.send('comfirmUpdate');
-    console.log('comfirmUpdate');
+    // ipcRenderer.send('comfirmUpdate');
+    // console.log('comfirmUpdate');
+    // 发送通知是否存在更新
+    let isUpdate = ipcRenderer.sendSync('exist_update');
+    if (isUpdate) {
+      ipcRenderer.invoke('new_update').then((res) => {
+        if (res) {
+          ipcRenderer.send('Sure');
+        }
+      });
+    }
+    console.log(isUpdate);
   };
 
   const onHideWindow = () => {
