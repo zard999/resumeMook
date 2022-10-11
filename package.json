@@ -12,16 +12,19 @@
     "build:main": "webpack --config ./webpack/webpack.main.prod.js",
     "build:render": "webpack --config ./webpack/webpack.render.prod.js",
     "build:dll": "webpack --config ./webpack/webpack.dll.prod.js",
+    "build:win": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --win --x64",
     "distOS": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --mac",
     "distWin64": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --win --x64",
     "distWin32": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --win --ia32",
-    "postinstall": "electron-builder install-app-deps"
+    "postinstall": "electron-builder install-app-deps",
+    "dist": "npm run build:dll && npm run build:main && npm run build:render && electron-builder --dir",
+    "pack": "npm run build:dll && npm run build:main && npm run build:render && electron-builder"
   },
   "build": {
     "appId": "com.resume.platform",
     "productName": "resume",
     "copyright": "Copyright © 2022 ${author}",
-    "asar": true,
+    "asar": false,
     "extends": null,
     "files": [
       "dist/**/*",
